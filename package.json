@@ -1,0 +1,25 @@
+{
+  "name": "schemas-event-primary",
+  "version": "1.0.0",
+  "description": "Primary event JSONSchemas for Wikimedia & Mediawiki event data",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://otto@gerrit.wikimedia.org:29418/schemas/event/primary"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/jsonschema",
+    "postinstall": "$(npm bin)/jsonschema-tools install-git-hook"
+  },
+  "keywords": [
+    "jsonschema",
+    "json",
+    "event",
+    "stream"
+  ],
+  "devDependencies": {
+    "@wikimedia/jsonschema-tools": "^0.6.0",
+    "mocha": "^6.2.0"
+  }
+}
