@@ -1,16 +1,28 @@
 {
-  "title": "mediawiki/client/error",
-  "description": "An error generated in a client runtime",
-  "$id": "/mediawiki/client/error/1.0.0",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "test/event",
+  "description": "Schema used for simple tests",
+  "$id": "/test/event/1.0.0",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
+  "examples": [
+    {
+      "$schema": "/test/event/1.0.0",
+      "meta": {
+        "stream": "test.event",
+        "id": "12345678-1234-5678-1234-567812345678",
+        "dt": "2019-01-01T00:00:00Z",
+        "domain": "wikimedia.org"
+      },
+      "test": "specific test value",
+      "test_map": {
+        "key1": "val1",
+        "key2": "val2"
+      }
+    }
+  ],
   "required": [
     "$schema",
-    "message",
-    "meta",
-    "type",
-    "url",
-    "user_agent"
+    "meta"
   ],
   "properties": {
     "$schema": {
@@ -56,31 +68,13 @@
         }
       }
     },
-    "type": {
+    "test": {
       "type": "string",
-      "description": "Type of error raised, e.g. an exception class."
+      "default": "default value"
     },
-    "message": {
-      "type": "string",
-      "description": "A message explaining what happened."
-    },
-    "url": {
-      "type": "string",
-      "description": "URL of the resource where the error was raised."
-    },
-    "user_agent": {
-      "type": "string",
-      "maxLength": 800,
-      "description": "Client user agent string."
-    },
-    "stack_trace": {
-      "type": "string",
-      "description": "Stack trace string."
-    },
-    "tags": {
+    "test_map": {
+      "description": "We want to support 'map' types using additionalProperties to specify the value types.  (Keys are always strings.)\n",
       "type": "object",
-      "maxProperties": 32,
-      "description": "Arbitrary extra data. Typically includes:\n- version: MediaWiki branch name\n- wiki: wiki ID\n- skin: skin name\n- user_language: user language\n- action: action (e.g. view, edit)\n- namespace: namespace where the error occured\n- page_title: title of page where the error occured\n- user_groups: comma-separated list of user groups\n- debug: truthy when ResourceLoader debug mode was enabled\n",
       "additionalProperties": {
         "type": "string"
       }

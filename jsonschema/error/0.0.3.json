@@ -1,16 +1,15 @@
 {
-  "title": "mediawiki/client/error",
-  "description": "An error generated in a client runtime",
-  "$id": "/mediawiki/client/error/1.0.0",
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "error",
+  "description": "Represents an error event",
+  "$id": "/error/0.0.3",
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
   "required": [
     "$schema",
+    "emitter_id",
     "message",
     "meta",
-    "type",
-    "url",
-    "user_agent"
+    "raw_event"
   ],
   "properties": {
     "$schema": {
@@ -56,34 +55,25 @@
         }
       }
     },
-    "type": {
+    "emitter_id": {
       "type": "string",
-      "description": "Type of error raised, e.g. an exception class."
+      "description": "identifies the entity where a fatal failure occured"
+    },
+    "raw_event": {
+      "type": "string",
+      "description": "string encoded original event"
     },
     "message": {
       "type": "string",
-      "description": "A message explaining what happened."
+      "description": "message describing an error"
     },
-    "url": {
+    "stack": {
       "type": "string",
-      "description": "URL of the resource where the error was raised."
+      "description": "stack trace of the error (optional)"
     },
-    "user_agent": {
+    "triggered_by": {
       "type": "string",
-      "maxLength": 800,
-      "description": "Client user agent string."
-    },
-    "stack_trace": {
-      "type": "string",
-      "description": "Stack trace string."
-    },
-    "tags": {
-      "type": "object",
-      "maxProperties": 32,
-      "description": "Arbitrary extra data. Typically includes:\n- version: MediaWiki branch name\n- wiki: wiki ID\n- skin: skin name\n- user_language: user language\n- action: action (e.g. view, edit)\n- namespace: namespace where the error occured\n- page_title: title of page where the error occured\n- user_groups: comma-separated list of user groups\n- debug: truthy when ResourceLoader debug mode was enabled\n",
-      "additionalProperties": {
-        "type": "string"
-      }
+      "description": "comma-separated list of event descriptions in `<topic>:<uri>` format, that represent a chain of events that caused this event to be emitted.\n"
     }
   }
 }

@@ -1,2 +1,6 @@
 schemaBasePath: ./jsonschema/
 logLevel: info
+ignoreSchemas:
+  # This legacy schema has polymorphic nullable types, which we no longer allow.
+  # Exclude it from tests.
+  - /mediawiki/recentchange/1.0.0
