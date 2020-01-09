@@ -7,7 +7,7 @@ type: object
 # jsonschema-tools along with their required fields.
 allOf:
     ### global event fields
-  - $ref: /wikimedia/common/1.0.0#
+  - $ref: /fragment/common/1.0.0#
     ### Mediawiki entity fields.
   - properties:
       database:

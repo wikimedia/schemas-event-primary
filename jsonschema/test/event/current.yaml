@@ -4,7 +4,7 @@ $id: /test/event/1.0.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
-  - $ref: /wikimedia/common/1.0.0#
+  - $ref: /fragment/common/1.0.0#
   - properties:
       test:
         type: string

@@ -1,7 +1,7 @@
 {
-  "title": "wikimedia/common",
-  "description": "Common schema fields for Wikimedia schemas",
-  "$id": "/wikimedia/common/1.0.0",
+  "title": "fragment/common",
+  "description": "Common schema fields for event schemas",
+  "$id": "/fragment/common/1.0.0",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
