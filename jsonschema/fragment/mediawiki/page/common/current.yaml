@@ -1,12 +1,12 @@
-title: mediawiki/page/common
+title: fragment/mediawiki/page/common
 description: Common schema fields for all Mediawiki page entities
-$id: /mediawiki/page/common/1.0.0
+$id: /fragment/mediawiki/page/common/1.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 
 allOf:
     ### Mediawiki entity fields.
-  - $ref: /mediawiki/common/1.0.0#
+  - $ref: /fragment/mediawiki/common/1.0.0#
     ### page entity fields
   - properties:
 

@@ -1,6 +1,6 @@
-title: mediawiki/revision/common
-description: Common schema fields for all Mediawiki revision entities
-$id: /mediawiki/revision/common/1.0.0
+title: fragment/mediawiki/page/common
+description: Common schema fields for all Mediawiki page entities
+$id: /fragment/mediawiki/page/common/1.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 required:
@@ -12,7 +12,6 @@ required:
   - page_namespace
   - page_title
   - rev_id
-  - rev_timestamp
 properties:
   $schema:
     type: string
@@ -96,34 +95,24 @@ properties:
         type: integer
         minimum: 0
   page_id:
-    description: The page ID of the page this revision belongs to.
+    description: The (database) page ID.
     type: integer
-    minimum: 1
+    minimum: 0
   page_title:
-    description: The normalized title of the page this revision belongs to.
+    description: The normalized title of the page.
     type: string
     minLength: 1
   page_namespace:
-    description: The namespace of the page this revision belongs to.
+    description: The namespace ID this page belongs to.
     type: integer
   page_is_redirect:
     description: >
-      True if this revision is a redirect.  This fact is ultimately represented
-      by revision content containing redirect wikitext.  If this revision is the
-      head revision of the page, then the page will also be a redirect.
+      True if this page is currently a redirect page.  This fact is ultimately
+      represented by revision content containing redirect wikitext.  If rev_id's
+      content has redirect wikitext, then this page is a redirect.  Note that
+      this state is also stored on the Mediawiki page table.
     type: boolean
   rev_id:
-    description: The (database) revision ID.
+    description: The head revision of the page at the time of this event.
     type: integer
     minimum: 0
-  rev_parent_id:
-    description: The parent revison ID of the revision that this event represents.
-    type: integer
-    minimum: 0
-  rev_timestamp:
-    description: >
-      The revision's creation time in ISO8601 format.  This field does not end
-      in '_dt' to better match the field name on the Mediawiki revision table.
-    type: string
-    format: date-time
-    maxLength: 128

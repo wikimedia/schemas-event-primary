@@ -1,6 +1,6 @@
-title: mediawiki/common
+title: fragment/mediawiki/common
 description: Common schema fields for all Mediawiki entities
-$id: /mediawiki/common/1.0.0
+$id: /fragment/mediawiki/common/1.0.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 # Use allOf so that common schemas are fully merged by

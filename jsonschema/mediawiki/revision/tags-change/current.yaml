@@ -5,7 +5,7 @@ $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
   ### revision entity fields - all revision related events should have these.
-  - $ref: /mediawiki/revision/common/1.0.0#
+  - $ref: /fragment/mediawiki/revision/common/1.0.0#
   ### revision/tags-change specific fields
   - properties:
       chronology_id:

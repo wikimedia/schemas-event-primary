@@ -1,11 +1,11 @@
-title: mediawiki/revision/common
+title: fragment/mediawiki/revision/common
 description: Common schema fields for all Mediawiki revision entities
-$id: /mediawiki/revision/common/1.0.0
+$id: /fragment/mediawiki/revision/common/1.0.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
   ### mediawiki entity fields - all mediawiki related events should have these.
-  - $ref: /mediawiki/common/1.0.0#
+  - $ref: /fragment/mediawiki/common/1.0.0#
   ### revision entity fields - all revision related events should have these.
   - properties:
       page_id:
