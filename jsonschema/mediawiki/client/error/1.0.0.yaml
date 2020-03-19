@@ -3,12 +3,24 @@ description: An error generated in a client runtime.
 $id: /mediawiki/client/error/1.0.0
 $schema: 'http://json-schema.org/draft-07/schema#'
 type: object
+examples:
+  - $schema: /mediawiki/client/error/1.0.0
+    meta:
+      stream: mediawiki.client.error
+      id: 12345678-1234-5678-1234-567812345678
+      dt: '2019-01-01T00:00:00Z'
+      domain: wikimedia.org
+    error_class: Error
+    message: example error message
+    url: 'http://en.wikipedia.org'
+    file_url: index.js
+    tags:
+      page_title: Main_Page
 required:
   - $schema
   - message
   - meta
-  - type
-  - url
+additionalProperties: false
 properties:
   $schema:
     type: string
@@ -43,7 +55,7 @@ properties:
         minLength: 1
       stream:
         type: string
-        description: Name of the stream/queue/dataset that this event belongs in
+        description: Name of the stream (dataset) that this event belongs in
         minLength: 1
   http:
     type: object
@@ -70,15 +82,18 @@ properties:
         description: Response headers sent back to the client (when known).
         additionalProperties:
           type: string
-  type:
+  error_class:
     type: string
-    description: 'Type of error raised, e.g. an exception class.'
+    description: Name of constructor e.g. Error or ReferenceError.
   message:
     type: string
-    description: A message explaining what happened.
+    description: Message explaining what happened.
   url:
     type: string
-    description: URL of the resource where the error was raised.
+    description: URL of page on which the error occurred.
+  file_url:
+    type: string
+    description: URL of the file where the error occurred.
   stack_trace:
     type: string
     description: Stack trace string.
