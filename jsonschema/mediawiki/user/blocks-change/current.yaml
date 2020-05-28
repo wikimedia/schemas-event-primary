@@ -1,6 +1,6 @@
 title: mediawiki/user/blocks-change
 description: Represents a MW User Blocks Change event
-$id: /mediawiki/user/blocks-change/1.0.0
+$id: /mediawiki/user/blocks-change/1.1.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
@@ -33,7 +33,7 @@ allOf:
 
 
       ### user/blocks_change specific fields
-      blocks:
+      blocks: &block_schema
         description: >
           The current state of blocks for the target user of this user change event.
         type: object
@@ -57,7 +57,27 @@ allOf:
             type: string
             format: date-time
             maxLength: 128
-
+          sitewide:
+            description: Whether the block is sitewide or partial.
+            type: boolean
+          page_restrictions:
+            description: Array of individual restrictions in the block.
+            type: array
+            items:
+              type: object
+              properties:
+                type:
+                  description: Type of the restriction
+                  enum:
+                    - page
+                    - namespace
+                value:
+                  type: integer
+                  description: >
+                    Namespace ID for namespace restrictions, page ID for page restrictions.
+              required:
+                - type
+                - value
         required:
           - name
           - email
@@ -76,28 +96,7 @@ allOf:
           was emitted.
         type: object
         properties:
-          blocks:
-            description: >
-              The prior state of blocks for the target user of this user change event.
-            type: object
-            properties:
-              name:
-                type: boolean
-              email:
-                type: boolean
-              user_talk:
-                type: boolean
-              account_create:
-                type: boolean
-              expiry_dt:
-                type: string
-                format: date-time
-                maxLength: 128
-            required:
-              - name
-              - email
-              - user_talk
-              - account_create
+          blocks: *block_schema
 
 required:
   - user_text
