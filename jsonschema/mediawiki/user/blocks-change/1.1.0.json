@@ -172,6 +172,7 @@
             "properties": {
               "type": {
                 "description": "Type of the restriction",
+                "type": "string",
                 "enum": [
                   "page",
                   "namespace"
@@ -238,6 +239,7 @@
                 "properties": {
                   "type": {
                     "description": "Type of the restriction",
+                    "type": "string",
                     "enum": [
                       "page",
                       "namespace"
