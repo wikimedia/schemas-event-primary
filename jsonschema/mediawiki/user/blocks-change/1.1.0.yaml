@@ -142,7 +142,7 @@ properties:
       sitewide:
         description: Whether the block is sitewide or partial.
         type: boolean
-      page_restrictions:
+      restrictions:
         description: Array of individual restrictions in the block.
         type: array
         items:
@@ -206,7 +206,7 @@ properties:
           sitewide:
             description: Whether the block is sitewide or partial.
             type: boolean
-          page_restrictions:
+          restrictions:
             description: Array of individual restrictions in the block.
             type: array
             items:
