@@ -156,7 +156,7 @@ properties:
               type: string
               enum:
                 - page
-                - namespace
+                - ns
             value:
               type: integer
               description: >
@@ -220,7 +220,7 @@ properties:
                   type: string
                   enum:
                     - page
-                    - namespace
+                    - ns
                 value:
                   type: integer
                   description: >

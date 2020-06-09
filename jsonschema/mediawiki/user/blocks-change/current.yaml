@@ -71,7 +71,7 @@ allOf:
                   type: string
                   enum:
                     - page
-                    - namespace
+                    - ns
                 value:
                   type: integer
                   description: >
