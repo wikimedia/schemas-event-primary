@@ -128,3 +128,9 @@ allOf:
 # where a recentchange event might look different than officially documented
 # at https://www.mediawiki.org/wiki/Manual:RCFeed.
 additionalProperties: true
+
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: mediawiki.recentchange
+      dt: '2020-07-01T00:00:00Z'

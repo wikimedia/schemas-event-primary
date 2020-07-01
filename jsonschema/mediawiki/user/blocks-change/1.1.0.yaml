@@ -9,54 +9,12 @@ required:
   - database
   - meta
   - user_text
-examples:
-  - $schema: /mediawiki/user/blocks-change/1.1.0
-    meta:
-      uri: 'https://en.wikipedia.org/wiki/User:ExampleUser'
-      request_id: 12345678-1234-5678-1234-567812345678
-      id: 12345678-1234-5678-1234-567812345678
-      dt: '2020-01-01T00:00:01Z'
-      domain: en.wikipedia.org
-      stream: mediawiki.user-blocks-change
-    database: enwiki
-    performer:
-      user_text: PermormerUser
-      user_groups:
-        - user
-        - bot
-      user_is_bot: true
-      user_id: 1234567
-      user_registration_dt: '2019-01-01T00:00:01Z'
-      user_edit_count: 0
-    comment: blocking comment
-    user_text: 1.2.3.4
-    user_groups:
-      - '*'
-    blocks:
-      name: false
-      email: false
-      user_talk: false
-      account_create: true
-      expiry_dt: '2040-01-01T00:00:01Z'
-      restrictions:
-        - type: page
-          value: 1
-    prior_state:
-      blocks:
-        name: false
-        email: false
-        user_talk: false
-        account_create: true
-        expiry_dt: '2040-01-01T00:00:01Z'
-        restrictions:
-          - type: page
-            value: 2
 properties:
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
   meta:
     type: object
     required:
@@ -69,23 +27,23 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream/queue/dataset that this event belongs in
+        type: string
         minLength: 1
   database:
     description: The name of the wiki database this event entity belongs to.
@@ -200,10 +158,10 @@ properties:
                 - page
                 - ns
             value:
-              type: integer
               description: >
                 Namespace ID for namespace restrictions, page ID for page
                 restrictions.
+              type: integer
   prior_state:
     description: >
       The prior state of the entity before this event. If a top level entity
@@ -264,7 +222,48 @@ properties:
                     - page
                     - ns
                 value:
-                  type: integer
                   description: >
                     Namespace ID for namespace restrictions, page ID for page
                     restrictions.
+                  type: integer
+examples:
+  - $schema: /mediawiki/user/blocks-change/1.1.0
+    meta:
+      uri: 'https://en.wikipedia.org/wiki/User:ExampleUser'
+      request_id: 12345678-1234-5678-1234-567812345678
+      dt: '2020-01-01T00:00:01Z'
+      domain: en.wikipedia.org
+      stream: mediawiki.user-blocks-change
+    database: examplewiki
+    performer:
+      user_text: PermormerUser
+      user_groups:
+        - user
+        - bot
+      user_is_bot: true
+      user_id: 1234567
+      user_registration_dt: '2019-01-01T00:00:01Z'
+      user_edit_count: 0
+    comment: blocking comment
+    user_text: 1.2.3.4
+    user_groups:
+      - '*'
+    blocks:
+      name: false
+      email: false
+      user_talk: false
+      account_create: true
+      expiry_dt: '2040-01-01T00:00:01Z'
+      restrictions:
+        - type: page
+          value: 1
+    prior_state:
+      blocks:
+        name: false
+        email: false
+        user_talk: false
+        account_create: true
+        expiry_dt: '2040-01-01T00:00:01Z'
+        restrictions:
+          - type: page
+            value: 2

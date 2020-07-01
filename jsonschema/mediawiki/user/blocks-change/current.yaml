@@ -104,15 +104,14 @@ required:
   - blocks
 
 examples:
-  - "$schema": "/mediawiki/user/blocks-change/1.1.0"
+  - $schema: { $ref: '#/$id' }
     meta:
       uri: https://en.wikipedia.org/wiki/User:ExampleUser
       request_id: 12345678-1234-5678-1234-567812345678
-      id: 12345678-1234-5678-1234-567812345678
       dt: '2020-01-01T00:00:01Z'
       domain: en.wikipedia.org
       stream: mediawiki.user-blocks-change
-    database: enwiki
+    database: examplewiki
     performer:
       user_text: PermormerUser
       user_groups:
