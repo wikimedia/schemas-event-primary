@@ -71,3 +71,22 @@ allOf:
 
 required:
   - prior_state
+
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: medaiwiki.page-move
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    page_id: 123
+    page_title: example_page_title
+    page_is_redirect: false
+    page_namespace: 0
+    rev_id: 123
+    prior_state:
+      page_title: example_old_page_title
+      page_namespace: 0
+      rev_id: 122
+
+
+

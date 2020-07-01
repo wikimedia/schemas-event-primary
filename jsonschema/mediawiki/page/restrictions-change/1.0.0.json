@@ -15,6 +15,22 @@
     "reason",
     "rev_id"
   ],
+  "examples": [
+    {
+      "$schema": "/mediawiki/page/restrictions-change/1.0.0",
+      "meta": {
+        "stream": "medaiwiki.page-restrictions-change",
+        "dt": "2020-07-01T00:00:00Z"
+      },
+      "database": "examplewiki",
+      "page_id": 123,
+      "page_title": "example_page_title",
+      "page_is_redirect": false,
+      "page_namespace": 0,
+      "rev_id": 123,
+      "reason": "example_reason"
+    }
+  ],
   "properties": {
     "$schema": {
       "type": "string",

@@ -25,4 +25,16 @@ allOf:
           The number of revisions of this page at the time of this event.
           During a delete, this number of revisions will be archived.
         type: integer
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: medaiwiki.page-delete
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    page_id: 123
+    page_title: example_page_title
+    page_is_redirect: false
+    page_namespace: 0
+    rev_id: 123
+
 

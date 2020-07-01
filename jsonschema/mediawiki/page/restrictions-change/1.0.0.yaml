@@ -14,41 +14,14 @@ required:
   - reason
   - rev_id
 properties:
+  page_namespace:
+    description: The namespace ID this page belongs to.
+    type: integer
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
-  meta:
-    type: object
-    required:
-      - dt
-      - stream
-    properties:
-      uri:
-        type: string
-        format: uri-reference
-        maxLength: 8192
-        description: Unique URI identifying the event or entity
-      request_id:
-        type: string
-        description: Unique ID of the request that caused the event
-      id:
-        type: string
-        description: Unique ID of this event
-      dt:
-        type: string
-        format: date-time
-        maxLength: 128
-        description: 'UTC event datetime, in ISO-8601 format'
-      domain:
-        type: string
-        description: Domain the event or entity pertains to
-        minLength: 1
-      stream:
-        type: string
-        description: Name of the stream/queue/dataset that this event belongs in
-        minLength: 1
+    type: string
   database:
     description: The name of the wiki database this event entity belongs to.
     type: string
@@ -103,9 +76,36 @@ properties:
     description: The normalized title of the page.
     type: string
     minLength: 1
-  page_namespace:
-    description: The namespace ID this page belongs to.
-    type: integer
+  meta:
+    type: object
+    required:
+      - dt
+      - stream
+    properties:
+      uri:
+        type: string
+        format: uri-reference
+        maxLength: 8192
+        description: Unique URI identifying the event or entity
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      id:
+        description: Unique ID of this event
+        type: string
+      dt:
+        type: string
+        format: date-time
+        maxLength: 128
+        description: 'UTC event datetime, in ISO-8601 format'
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      stream:
+        description: Name of the stream/queue/dataset that this event belongs in
+        type: string
+        minLength: 1
   page_is_redirect:
     description: >
       True if this page is currently a redirect page.  This fact is ultimately
@@ -127,8 +127,8 @@ properties:
     additionalProperties:
       type: string
   reason:
-    type: string
     description: Explanation of the reason for protecting the page.
+    type: string
   prior_state:
     description: >
       The prior state of the entity before this event. If a top level entity
@@ -140,3 +140,15 @@ properties:
         type: object
         additionalProperties:
           type: string
+examples:
+  - $schema: /mediawiki/page/restrictions-change/1.0.0
+    meta:
+      stream: medaiwiki.page-restrictions-change
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    page_id: 123
+    page_title: example_page_title
+    page_is_redirect: false
+    page_namespace: 0
+    rev_id: 123
+    reason: example_reason

@@ -40,3 +40,19 @@ allOf:
               description: Whether link is external
               type: boolean
 
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: medaiwiki.page-links-change
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    page_id: 123
+    page_title: example_page_title
+    page_is_redirect: false
+    page_namespace: 0
+    rev_id: 123
+    added_links:
+      - link: example_link
+        external: false
+
+

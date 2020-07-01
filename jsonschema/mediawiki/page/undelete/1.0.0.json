@@ -4,6 +4,24 @@
   "$id": "/mediawiki/page/undelete/1.0.0",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
+  "examples": [
+    {
+      "$schema": "/mediawiki/page/undelete/1.0.0",
+      "meta": {
+        "stream": "medaiwiki.page-undelete",
+        "dt": "2020-07-01T00:00:00Z"
+      },
+      "database": "examplewiki",
+      "page_id": 123,
+      "page_title": "example_page_title",
+      "page_is_redirect": false,
+      "page_namespace": 0,
+      "rev_id": 123,
+      "prior_state": {
+        "page_id": 123
+      }
+    }
+  ],
   "required": [
     "$schema",
     "database",
