@@ -28,3 +28,14 @@ allOf:
 required:
   - original_event
   - continue
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: change-prop.continue.example
+      dt: '2020-07-01T00:00:00Z'
+    emitter_id: example_emitter_id
+    original_event:
+      example_key: example_value
+    continue:
+      example_key: example_value
+

@@ -10,10 +10,10 @@ required:
   - original_event
 properties:
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
   meta:
     type: object
     required:
@@ -26,39 +26,49 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream/queue/dataset that this event belongs in
+        type: string
         minLength: 1
   emitter_id:
-    type: string
     description: identifies the entity that requested a retry
-  original_event:
-    type: object
-    description: original event that began the batch
-  continue:
-    type: object
-    description: continuation token
-  triggered_by:
     type: string
+  original_event:
+    description: original event that began the batch
+    type: object
+  continue:
+    description: continuation token
+    type: object
+  triggered_by:
     description: >
       comma-separated list of event descriptions in `<topic>:<uri>` format, that
       represent a chain of events that caused this event to be emitted.
+    type: string
   sequence_num:
     type: integer
     minimum: 1
     description: Number of this continuation event in the current sequence.
+examples:
+  - $schema: /change-prop/continue/1.0.0
+    meta:
+      stream: change-prop.continue.example
+      dt: '2020-07-01T00:00:00Z'
+    emitter_id: example_emitter_id
+    original_event:
+      example_key: example_value
+    continue:
+      example_key: example_value

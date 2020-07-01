@@ -10,6 +10,22 @@
     "meta",
     "original_event"
   ],
+  "examples": [
+    {
+      "$schema": "/change-prop/continue/1.0.0",
+      "meta": {
+        "stream": "change-prop.continue.example",
+        "dt": "2020-07-01T00:00:00Z"
+      },
+      "emitter_id": "example_emitter_id",
+      "original_event": {
+        "example_key": "example_value"
+      },
+      "continue": {
+        "example_key": "example_value"
+      }
+    }
+  ],
   "properties": {
     "$schema": {
       "type": "string",

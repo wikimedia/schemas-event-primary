@@ -27,3 +27,11 @@ required:
   - emitter_id
   - raw_event
   - message
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: error.example
+      dt: '2020-07-01T00:00:00Z'
+    emitter_id: example_emitter_id
+    raw_event: '{"example_raw_event": "example_value"}'
+    message: example_message

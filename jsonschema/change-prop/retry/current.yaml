@@ -28,3 +28,12 @@ required:
   - emitter_id
   - retries_left
   - original_event
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      stream: change-prop.retry.example
+      dt: '2020-07-01T00:00:00Z'
+    emitter_id: example_emitter_id
+    retries_left: 1
+    original_event:
+      example_key: example_value
