@@ -9,11 +9,25 @@ required:
   - meta
   - type
 properties:
-  $schema:
+  page_title:
+    description: the title of the page that the job was triggered for
     type: string
+    minLength: 1
+  $schema:
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
+  database:
+    description: The name of the wiki database this event belongs to.
+    type: string
+    minLength: 1
+  mediawiki_signature:
+    description: The cryptograthic signature of the event baed on MW SecretKey
+    type: string
+  page_namespace:
+    description: the namespace of the page that the job was triggered for
+    type: integer
   meta:
     type: object
     required:
@@ -26,38 +40,24 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream/queue/dataset that this event belongs in
+        type: string
         minLength: 1
-  database:
-    description: The name of the wiki database this event belongs to.
-    type: string
-    minLength: 1
-  type:
-    description: type of the job
-    type: string
-  page_namespace:
-    description: the namespace of the page that the job was triggered for
-    type: integer
-  page_title:
-    description: the title of the page that the job was triggered for
-    type: string
-    minLength: 1
   delay_until:
     description: don't execute the job until a particular time
     type: string
@@ -67,8 +67,8 @@ properties:
     description: unique ID of the job derived from the deduplication info
     type: string
   root_event:
-    type: object
     description: Unique identifier of the root event that triggered this event creation
+    type: object
     required:
       - dt
       - signature
@@ -79,11 +79,18 @@ properties:
         format: date-time
         maxLength: 128
       signature:
-        type: string
         description: the unique signature of root event
-  mediawiki_signature:
-    description: The cryptograthic signature of the event baed on MW SecretKey
+        type: string
+  type:
+    description: type of the job
     type: string
   params:
     description: various parameters speific to a particular job
     type: object
+examples:
+  - $schema: /mediawiki/job/1.0.0
+    meta:
+      stream: mediawiki.job.example
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    type: example_job

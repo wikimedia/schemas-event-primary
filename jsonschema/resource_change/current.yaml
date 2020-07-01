@@ -34,4 +34,10 @@ allOf:
         required:
           - dt
           - signature
+examples:
+  - $schema: { $ref: "#/$id" }
+    meta:
+      stream: resource_change_example
+      dt: '2020-07-01T00:00:00Z'
+      uri: '/example/resource/uri'
 

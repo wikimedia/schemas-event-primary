@@ -63,3 +63,10 @@ required:
   - database
   - type
   # TODO: add mediawiki_signature to required once producing it is deployed
+examples:
+  - $schema: { $ref: "#/$id" }
+    meta:
+      stream: mediawiki.job.example
+      dt: '2020-07-01T00:00:00Z'
+    database: examplewiki
+    type: example_job

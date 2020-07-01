@@ -10,6 +10,17 @@
     "meta",
     "type"
   ],
+  "examples": [
+    {
+      "$schema": "/mediawiki/job/1.0.0",
+      "meta": {
+        "stream": "mediawiki.job.example",
+        "dt": "2020-07-01T00:00:00Z"
+      },
+      "database": "examplewiki",
+      "type": "example_job"
+    }
+  ],
   "properties": {
     "$schema": {
       "type": "string",

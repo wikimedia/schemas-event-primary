@@ -3,30 +3,17 @@ description: An error generated in a client runtime.
 $id: /mediawiki/client/error/1.0.0
 $schema: 'http://json-schema.org/draft-07/schema#'
 type: object
-examples:
-  - $schema: /mediawiki/client/error/1.0.0
-    meta:
-      stream: mediawiki.client.error
-      id: 12345678-1234-5678-1234-567812345678
-      dt: '2019-01-01T00:00:00Z'
-      domain: wikimedia.org
-    error_class: Error
-    message: example error message
-    url: 'http://en.wikipedia.org'
-    file_url: index.js
-    tags:
-      page_title: Main_Page
+additionalProperties: false
 required:
   - $schema
   - message
   - meta
-additionalProperties: false
 properties:
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
   meta:
     type: object
     required:
@@ -39,64 +26,64 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream (dataset) that this event belongs in
+        type: string
         minLength: 1
   http:
     type: object
     properties:
       method:
-        type: string
         description: 'The HTTP request method (GET, POST, etc.)'
-      status_code:
-        type: integer
-        description: The HTTP status code returned for this request (when known)
-      client_ip:
         type: string
+      status_code:
+        description: The HTTP status code returned for this request (when known)
+        type: integer
+      client_ip:
         description: The http client's IP address
+        type: string
       has_cookies:
-        type: boolean
         description: True if the http request has any cookies set
+        type: boolean
       request_headers:
-        type: object
         description: 'Request headers sent by the client.  E.g. user-agent, etc.'
+        type: object
         additionalProperties:
           type: string
       response_headers:
-        type: object
         description: Response headers sent back to the client (when known).
+        type: object
         additionalProperties:
           type: string
   error_class:
-    type: string
     description: Name of constructor e.g. Error or ReferenceError.
+    type: string
   message:
-    type: string
     description: Message explaining what happened.
+    type: string
   url:
-    type: string
     description: URL of page on which the error occurred.
+    type: string
   file_url:
-    type: string
     description: URL of the file where the error occurred.
-  stack_trace:
     type: string
+  stack_trace:
     description: Stack trace string.
+    type: string
   tags:
     type: object
     maxProperties: 32
@@ -113,3 +100,14 @@ properties:
       - debug: truthy when ResourceLoader debug mode was enabled
     additionalProperties:
       type: string
+examples:
+  - $schema: /mediawiki/client/error/1.0.0
+    meta:
+      stream: mediawiki.client.error
+      dt: '2019-01-01T00:00:00Z'
+    error_class: Error
+    message: example error message
+    url: 'http://en.wikipedia.org'
+    file_url: index.js
+    tags:
+      page_title: Main_Page

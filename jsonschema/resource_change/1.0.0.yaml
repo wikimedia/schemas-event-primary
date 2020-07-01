@@ -8,10 +8,10 @@ required:
   - meta
 properties:
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
   meta:
     type: object
     required:
@@ -24,23 +24,23 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream/queue/dataset that this event belongs in
+        type: string
         minLength: 1
   tags:
     type: array
@@ -49,13 +49,13 @@ properties:
     items:
       type: string
   triggered_by:
-    type: string
     description: >
       comma-separated list of event descriptions in `<topic>:<uri>` format, that
       represent a chain of events that caused this event to be emitted.
+    type: string
   root_event:
-    type: object
     description: Unique identifier of the root event that triggered this event creation
+    type: object
     required:
       - dt
       - signature
@@ -66,5 +66,11 @@ properties:
         format: date-time
         maxLength: 128
       signature:
-        type: string
         description: the unique signature of root event
+        type: string
+examples:
+  - $schema: /resource_change/1.0.0
+    meta:
+      stream: resource_change_example
+      dt: '2020-07-01T00:00:00Z'
+      uri: /example/resource/uri

@@ -4,6 +4,16 @@
   "$id": "/resource_change/1.0.0",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
+  "examples": [
+    {
+      "$schema": "/resource_change/1.0.0",
+      "meta": {
+        "stream": "resource_change_example",
+        "dt": "2020-07-01T00:00:00Z",
+        "uri": "/example/resource/uri"
+      }
+    }
+  ],
   "required": [
     "$schema",
     "meta"

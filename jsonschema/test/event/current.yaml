@@ -17,6 +17,12 @@ allOf:
         type: object
         additionalProperties:
           type: string
-
-examples:
-  - {"$schema": "/test/event/1.0.0", "meta": {"stream": "test.event", "id": "12345678-1234-5678-1234-567812345678", "dt": "2019-01-01T00:00:00Z", "domain": "wikimedia.org"}, "test": "specific test value", "test_map": {"key1": "val1", "key2": "val2"}}
+examples: 
+  - $schema: { $ref: "#/$id" }
+    meta:
+      stream: test.event.example
+      dt: '2019-01-01T00:00:00Z'
+    test: specific test value
+    test_map:
+      key1: val1
+      key2: val2
