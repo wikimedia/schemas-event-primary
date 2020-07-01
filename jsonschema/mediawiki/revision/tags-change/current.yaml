@@ -69,3 +69,35 @@ allOf:
             type: array
             items:
               type: string
+examples:
+  - $schema: { $ref: '#/$id' }
+    meta:
+      uri: https://examplewiki.wikipedia.org/wiki/TestPage10
+      dt: '2020-06-10T18:57:16Z'
+      domain: test.wikipedia.org
+      stream: mediawiki.revision-tags-change
+    database: examplewiki
+    page_id: 123
+    page_title: TestPage10
+    page_namespace: 0
+    rev_id: 123
+    rev_timestamp: '2020-06-10T18:57:16Z'
+    rev_sha1: mr0szy90m5qbn6tek7ch3nebaild3tm
+    rev_minor_edit: false
+    rev_len: 3
+    rev_content_model: wikitext
+    rev_content_format: text/x-wiki
+    performer:
+      user_text: example_user_text
+      user_groups:
+      - "*"
+      - user
+      - autoconfirmed
+      user_is_bot: false
+      user_id: 123
+      user_registration_dt: '2016-01-29T21:13:24Z'
+      user_edit_count: 1
+    page_is_redirect: false
+    rev_parent_id: 122
+    rev_content_changed: true
+    tags: [example_tag]

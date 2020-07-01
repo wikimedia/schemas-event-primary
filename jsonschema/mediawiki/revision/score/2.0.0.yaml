@@ -14,41 +14,14 @@ required:
   - rev_id
   - rev_timestamp
 properties:
+  page_namespace:
+    description: The namespace of the page this revision belongs to.
+    type: integer
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
-  meta:
-    type: object
-    required:
-      - dt
-      - stream
-    properties:
-      uri:
-        type: string
-        format: uri-reference
-        maxLength: 8192
-        description: Unique URI identifying the event or entity
-      request_id:
-        type: string
-        description: Unique ID of the request that caused the event
-      id:
-        type: string
-        description: Unique ID of this event
-      dt:
-        type: string
-        format: date-time
-        maxLength: 128
-        description: 'UTC event datetime, in ISO-8601 format'
-      domain:
-        type: string
-        description: Domain the event or entity pertains to
-        minLength: 1
-      stream:
-        type: string
-        description: Name of the stream/queue/dataset that this event belongs in
-        minLength: 1
+    type: string
   database:
     description: The name of the wiki database this event entity belongs to.
     type: string
@@ -103,9 +76,36 @@ properties:
     description: The normalized title of the page this revision belongs to.
     type: string
     minLength: 1
-  page_namespace:
-    description: The namespace of the page this revision belongs to.
-    type: integer
+  meta:
+    type: object
+    required:
+      - dt
+      - stream
+    properties:
+      uri:
+        type: string
+        format: uri-reference
+        maxLength: 8192
+        description: Unique URI identifying the event or entity
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      id:
+        description: Unique ID of this event
+        type: string
+      dt:
+        type: string
+        format: date-time
+        maxLength: 128
+        description: 'UTC event datetime, in ISO-8601 format'
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      stream:
+        description: Name of the stream/queue/dataset that this event belongs in
+        type: string
+        minLength: 1
   page_is_redirect:
     description: >
       True if this revision is a redirect.  This fact is ultimately represented
@@ -132,7 +132,7 @@ properties:
       List of ORES score objects. Each model uses the model name as a map key
       and was used to score this revision.  Example: {
         "awesomeness": {
-          "model_name": "awesomeness"
+          "model_name": "awesomeness",
           "model_version": "1.0.1",
           "prediction": ["yes", "mostly"],
           "probability": {
@@ -194,3 +194,45 @@ properties:
         message:
           description: A human-readable explanation of what went wrong
           type: string
+examples:
+  - rev_minor_edit: false
+    $schema: /mediawiki/revision/score/2.0.0
+    database: examplewiki
+    page_id: 123
+    page_title: TestPage10
+    page_namespace: 0
+    rev_id: 123
+    rev_timestamp: '2020-06-10T18:57:16Z'
+    rev_sha1: mr0szy90m5qbn6tek7ch3nebaild3tm
+    meta:
+      uri: 'https://examplewiki.wikipedia.org/wiki/TestPage10'
+      dt: '2020-06-10T18:57:16Z'
+      domain: test.wikipedia.org
+      stream: mediawiki.revision-score
+    rev_len: 3
+    rev_content_model: wikitext
+    rev_content_format: text/x-wiki
+    performer:
+      user_text: example_user_text
+      user_groups:
+        - '*'
+        - user
+        - autoconfirmed
+      user_is_bot: false
+      user_id: 123
+      user_registration_dt: '2016-01-29T21:13:24Z'
+      user_edit_count: 1
+    page_is_redirect: false
+    rev_parent_id: 122
+    rev_content_changed: true
+    scores:
+      example_model:
+        model_name: example_model
+        model_version: 1.0.1
+        prediction:
+          - 'yes'
+          - mostly
+        probability:
+          'yes': 0.99
+          mostly: 0.9
+          hardly: 0.01

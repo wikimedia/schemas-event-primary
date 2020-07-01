@@ -4,6 +4,58 @@
   "$id": "/mediawiki/revision/score/2.0.0",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
+  "examples": [
+    {
+      "$schema": "/mediawiki/revision/score/2.0.0",
+      "meta": {
+        "uri": "https://examplewiki.wikipedia.org/wiki/TestPage10",
+        "dt": "2020-06-10T18:57:16Z",
+        "domain": "test.wikipedia.org",
+        "stream": "mediawiki.revision-score"
+      },
+      "database": "examplewiki",
+      "page_id": 123,
+      "page_title": "TestPage10",
+      "page_namespace": 0,
+      "rev_id": 123,
+      "rev_timestamp": "2020-06-10T18:57:16Z",
+      "rev_sha1": "mr0szy90m5qbn6tek7ch3nebaild3tm",
+      "rev_minor_edit": false,
+      "rev_len": 3,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "example_user_text",
+        "user_groups": [
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 123,
+        "user_registration_dt": "2016-01-29T21:13:24Z",
+        "user_edit_count": 1
+      },
+      "page_is_redirect": false,
+      "rev_parent_id": 122,
+      "rev_content_changed": true,
+      "scores": {
+        "example_model": {
+          "model_name": "example_model",
+          "model_version": "1.0.1",
+          "prediction": [
+            "yes",
+            "mostly"
+          ],
+          "probability": {
+            "yes": 0.99,
+            "mostly": 0.9,
+            "hardly": 0.01
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "$schema",
     "database",
@@ -142,7 +194,7 @@
       "maxLength": 128
     },
     "scores": {
-      "description": "List of ORES score objects. Each model uses the model name as a map key and was used to score this revision.  Example: {\n  \"awesomeness\": {\n    \"model_name\": \"awesomeness\"\n    \"model_version\": \"1.0.1\",\n    \"prediction\": [\"yes\", \"mostly\"],\n    \"probability\": {\n      \"yes\": 0.99,\n      \"mostly\": 0.90,\n      \"hardly\": 0.01\n    }\n  }\n}\n",
+      "description": "List of ORES score objects. Each model uses the model name as a map key and was used to score this revision.  Example: {\n  \"awesomeness\": {\n    \"model_name\": \"awesomeness\",\n    \"model_version\": \"1.0.1\",\n    \"prediction\": [\"yes\", \"mostly\"],\n    \"probability\": {\n      \"yes\": 0.99,\n      \"mostly\": 0.90,\n      \"hardly\": 0.01\n    }\n  }\n}\n",
       "type": "object",
       "additionalProperties": {
         "type": "object",
