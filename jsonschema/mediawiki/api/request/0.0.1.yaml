@@ -8,10 +8,10 @@ required:
   - meta
 properties:
   $schema:
-    type: string
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
   meta:
     type: object
     required:
@@ -24,58 +24,64 @@ properties:
         maxLength: 8192
         description: Unique URI identifying the event or entity
       request_id:
-        type: string
         description: Unique ID of the request that caused the event
-      id:
         type: string
+      id:
         description: Unique ID of this event
+        type: string
       dt:
         type: string
         format: date-time
         maxLength: 128
         description: 'UTC event datetime, in ISO-8601 format'
       domain:
-        type: string
         description: Domain the event or entity pertains to
+        type: string
         minLength: 1
       stream:
-        type: string
         description: Name of the stream/queue/dataset that this event belongs in
+        type: string
         minLength: 1
   http:
-    type: object
     description: Information about the HTTP request that generated this event.
+    type: object
     properties:
       method:
-        type: string
         description: 'The HTTP request method (GET, POST, etc.)'
-      client_ip:
         type: string
+      client_ip:
         description: The http client's IP address
+        type: string
       request_headers:
-        type: object
         description: Request headers sent by the client.
+        type: object
         additionalProperties:
           type: string
   database:
-    type: string
     description: The name of the wiki database this event belongs to.
+    type: string
     minLength: 1
   backend_time_ms:
-    type: integer
     description: Elapsed milliseconds to process request as measured by MediaWiki
+    type: integer
   api_error_codes:
-    type: array
     description: >
       List of error codes for any errors encountered, e.g.
       'apierror-missingparam' If this field is missing or empty, no errors were
       encountered.
+    type: array
     items:
       type: string
   params:
-    type: object
     description: >
       Request parameters. These might come from http query string, or from the
       POST body. Sensitive params are redacted.
+    type: object
     additionalProperties:
       type: string
+examples:
+  - $schema: /mediawiki/api/request/0.0.1
+    meta:
+      dt: '2020-07-01T00:00:00Z'
+      stream: example_stream
+    database: examplewiki

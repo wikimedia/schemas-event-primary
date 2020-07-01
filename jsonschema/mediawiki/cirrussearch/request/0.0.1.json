@@ -5,6 +5,16 @@
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
+  "examples": [
+    {
+      "$schema": "/mediawiki/cirrussearch/request/0.0.1",
+      "meta": {
+        "dt": "2020-07-01T00:00:00Z",
+        "stream": "example_stream"
+      },
+      "database": "examplewiki"
+    }
+  ],
   "required": [
     "$schema",
     "meta"

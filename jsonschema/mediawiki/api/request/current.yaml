@@ -50,3 +50,9 @@ allOf:
           or from the POST body. Sensitive params are redacted.
         additionalProperties:
           type: string
+examples:
+  - $schema: { $ref: "#/$id" }
+    meta:
+      dt: '2020-07-01T00:00:00Z'
+      stream: example_stream
+    database: examplewiki
