@@ -1,5 +1,8 @@
 # 1.0.0
-- switch to semver versioning 1.0.0 is after 2.yaml
+- Add errored_schema_uri and errored_stream_name
+
+# 0.0.3
+- switch to semver versioning 0.0.3 is after 2.yaml
 - switch to JSONSchema Draft 7
 - use $schema instead of meta.schema, meta.schema has been removed.
 - use meta.stream instead of meta.topic, meta.topic has been removed.
