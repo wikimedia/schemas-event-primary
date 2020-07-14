@@ -1,8 +1,8 @@
 'Primary' event JSONSchemas for Wikimedia & Mediawiki event data.
 
 This schema repository contains event schemas that directly affect
-use facing features.  These schemas are meant to represent 'tier 1' events.
-This resository compliments the [schemas/event/secondary](https://gerrit.wikimedia.org/r/plugins/gitiles/schemas/event/secondary/+/master) repository.
+user-facing features.  These schemas are meant to represent 'tier 1' events.
+This repository complements the [schemas/event/secondary](https://gerrit.wikimedia.org/r/plugins/gitiles/schemas/event/secondary/+/master) repository.
 
 See also:
 - (Event Platform/Schemas)[https://wikitech.wikimedia.org/wiki/Event_Platform/Schemas]
