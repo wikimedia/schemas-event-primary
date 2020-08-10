@@ -1,7 +1,7 @@
 title: fragment/http
 description: Information about an HTTP request.
 $id: /fragment/http/1.1.0
-$schema: https://json-schema.org/draft-07/schema#
+$schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 properties:
   http:
@@ -12,7 +12,7 @@ properties:
         description: The protocol used for the request (HTTP or HTTPS)
       method:
         type: string
-        description: The HTTP request method (GET, POST, etc.)
+        description: 'The HTTP request method (GET, POST, etc.)'
       status_code:
         type: integer
         description: The HTTP status code returned for this request (when known)
@@ -24,7 +24,7 @@ properties:
         description: True if the http request has any cookies set
       request_headers:
         type: object
-        description: Request headers sent by the client.  E.g. user-agent, etc.
+        description: 'Request headers sent by the client.  E.g. user-agent, etc.'
         additionalProperties:
           type: string
       response_headers:
