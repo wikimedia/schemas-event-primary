@@ -1,0 +1,92 @@
+title: fragment/w3c/reportingapi/report
+description: >
+  Browser-generated problem reports, as described by the W3C Reporting API.
+  https://www.w3.org/TR/reporting/ This is a fragment that includes the basic
+  fields part of every report. Each report type should use this fragment when
+  writing their own event schema with the appropriate fields for the 'body'
+  object.
+$id: /fragment/w3c/reportingapi/report/1.0.0
+$schema: 'https://json-schema.org/draft-07/schema#'
+type: object
+required:
+  - $schema
+  - meta
+properties:
+  $schema:
+    description: >
+      A URI identifying the JSONSchema for this event. This should match an
+      schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
+  meta:
+    type: object
+    required:
+      - dt
+      - stream
+    properties:
+      uri:
+        type: string
+        format: uri-reference
+        maxLength: 8192
+        description: Unique URI identifying the event or entity
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      id:
+        description: Unique ID of this event
+        type: string
+      dt:
+        type: string
+        format: date-time
+        maxLength: 128
+        description: 'UTC event datetime, in ISO-8601 format'
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      stream:
+        description: Name of the stream/queue/dataset that this event belongs in
+        type: string
+        minLength: 1
+  http:
+    type: object
+    properties:
+      method:
+        description: 'The HTTP request method (GET, POST, etc.)'
+        type: string
+      status_code:
+        description: The HTTP status code returned for this request (when known)
+        type: integer
+      client_ip:
+        description: The http client's IP address
+        type: string
+      has_cookies:
+        description: True if the http request has any cookies set
+        type: boolean
+      request_headers:
+        description: 'Request headers sent by the client.  E.g. user-agent, etc.'
+        type: object
+        additionalProperties:
+          type: string
+      response_headers:
+        description: Response headers sent back to the client (when known).
+        type: object
+        additionalProperties:
+          type: string
+  age:
+    description: >
+      The number of milliseconds between the report's timestamp and the time the
+      report was sent.
+    type: number
+  type:
+    description: 'The flavor of the report, like ''network-error'' or ''hpkp''.'
+    type: string
+  url:
+    description: The URL that caused the report to be generated.
+    type: string
+  user_agent:
+    description: >
+      The name of the User-Agent used at the time of loading the original URL
+      which caused the report to be generated. This may differ from the
+      User-Agent used in the HTTP request that sent the report due to factors
+      like the original fetch using the "request desktop site" feature.
+    type: string

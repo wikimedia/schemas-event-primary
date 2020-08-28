@@ -1,0 +1,107 @@
+{
+  "title": "fragment/w3c/reportingapi/report",
+  "description": "Browser-generated problem reports, as described by the W3C Reporting API. https://www.w3.org/TR/reporting/ This is a fragment that includes the basic fields part of every report. Each report type should use this fragment when writing their own event schema with the appropriate fields for the 'body' object.\n",
+  "$id": "/fragment/w3c/reportingapi/report/1.0.0",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "$schema",
+    "meta"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "A URI identifying the JSONSchema for this event. This should match an schema's $id in a schema repository. E.g. /schema/title/1.0.0\n"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "dt",
+        "stream"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri-reference",
+          "maxLength": 8192,
+          "description": "Unique URI identifying the event or entity"
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Unique ID of the request that caused the event"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique ID of this event"
+        },
+        "dt": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 128,
+          "description": "UTC event datetime, in ISO-8601 format"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain the event or entity pertains to",
+          "minLength": 1
+        },
+        "stream": {
+          "type": "string",
+          "description": "Name of the stream/queue/dataset that this event belongs in",
+          "minLength": 1
+        }
+      }
+    },
+    "http": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "The HTTP request method (GET, POST, etc.)"
+        },
+        "status_code": {
+          "type": "integer",
+          "description": "The HTTP status code returned for this request (when known)"
+        },
+        "client_ip": {
+          "type": "string",
+          "description": "The http client's IP address"
+        },
+        "has_cookies": {
+          "type": "boolean",
+          "description": "True if the http request has any cookies set"
+        },
+        "request_headers": {
+          "type": "object",
+          "description": "Request headers sent by the client.  E.g. user-agent, etc.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "response_headers": {
+          "type": "object",
+          "description": "Response headers sent back to the client (when known).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "age": {
+      "type": "number",
+      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n"
+    },
+    "type": {
+      "type": "string",
+      "description": "The flavor of the report, like 'network-error' or 'hpkp'."
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL that caused the report to be generated."
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The name of the User-Agent used at the time of loading the original URL which caused the report to be generated. This may differ from the User-Agent used in the HTTP request that sent the report due to factors like the original fetch using the \"request desktop site\" feature.\n"
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "title": "w3c/reportingapi/network_error",
+  "description": "Browser-generated problem reports, as described by the W3C Reporting API. https://www.w3.org/TR/reporting/ This schema only accomodates the Network Error Logging API, and not the other report types available in the Reporting API. See https://w3c.github.io/network-error-logging/\n",
+  "$id": "/w3c/reportingapi/network_error/1.0.0",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "examples": [
+    {
+      "$schema": "/w3c/reportingapi/network_error/1.0.0",
+      "meta": {
+        "stream": "w3c.reportingapi.network_error",
+        "dt": "2020-09-01T00:00:00Z"
+      },
+      "age": 0,
+      "type": "network-error",
+      "url": "https://www.example.com/",
+      "body": {
+        "sampling_fraction": 0.5,
+        "referrer": "http://example.com/",
+        "server_ip": "123.122.121.120",
+        "protocol": "h2",
+        "method": "GET",
+        "status_code": 200,
+        "elapsed_time": 823,
+        "type": "http.protocol.error"
+      }
+    },
+    {
+      "$schema": "/w3c/reportingapi/network_error/1.0.0",
+      "meta": {
+        "stream": "w3c.reportingapi.network_error",
+        "dt": "2020-09-01T00:00:00Z"
+      },
+      "age": 0,
+      "type": "network-error",
+      "url": "https://widget.com/thing.js",
+      "body": {
+        "sampling_fraction": 1,
+        "referrer": "https://www.example.com/",
+        "server_ip": "",
+        "protocol": "",
+        "method": "GET",
+        "status_code": 0,
+        "elapsed_time": 143,
+        "type": "dns.name_not_resolved"
+      }
+    },
+    {
+      "$schema": "/w3c/reportingapi/network_error/1.0.0",
+      "meta": {
+        "stream": "w3c.reportingapi.network_error",
+        "dt": "2020-09-01T00:00:00Z"
+      },
+      "age": 0,
+      "type": "network-error",
+      "url": "https://new-subdomain.example.com/",
+      "body": {
+        "sampling_fraction": 1,
+        "server_ip": "",
+        "protocol": "http/1.1",
+        "method": "GET",
+        "status_code": 0,
+        "elapsed_time": 48,
+        "type": "dns.name_not_resolved"
+      }
+    },
+    {
+      "$schema": "/w3c/reportingapi/network_error/1.0.0",
+      "meta": {
+        "stream": "w3c.reportingapi.network_error",
+        "dt": "2020-09-01T00:00:00Z"
+      },
+      "age": 30654,
+      "body": {
+        "elapsed_time": 108,
+        "method": "GET",
+        "phase": "connection",
+        "protocol": "http/1.1",
+        "referrer": "",
+        "sampling_fraction": 1,
+        "server_ip": "",
+        "status_code": 0,
+        "type": "tcp.refused"
+      },
+      "type": "network-error",
+      "url": "https://mcnulty.nucleosynth.space:8443/",
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36"
+    }
+  ],
+  "required": [
+    "$schema",
+    "meta"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "A URI identifying the JSONSchema for this event. This should match an schema's $id in a schema repository. E.g. /schema/title/1.0.0\n",
+      "type": "string"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "dt",
+        "stream"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri-reference",
+          "maxLength": 8192,
+          "description": "Unique URI identifying the event or entity"
+        },
+        "request_id": {
+          "description": "Unique ID of the request that caused the event",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique ID of this event",
+          "type": "string"
+        },
+        "dt": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 128,
+          "description": "UTC event datetime, in ISO-8601 format"
+        },
+        "domain": {
+          "description": "Domain the event or entity pertains to",
+          "type": "string",
+          "minLength": 1
+        },
+        "stream": {
+          "description": "Name of the stream/queue/dataset that this event belongs in",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "http": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "description": "The HTTP request method (GET, POST, etc.)",
+          "type": "string"
+        },
+        "status_code": {
+          "description": "The HTTP status code returned for this request (when known)",
+          "type": "integer"
+        },
+        "client_ip": {
+          "description": "The http client's IP address",
+          "type": "string"
+        },
+        "has_cookies": {
+          "description": "True if the http request has any cookies set",
+          "type": "boolean"
+        },
+        "request_headers": {
+          "description": "Request headers sent by the client.  E.g. user-agent, etc.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "response_headers": {
+          "description": "Response headers sent back to the client (when known).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "age": {
+      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n",
+      "type": "number"
+    },
+    "type": {
+      "description": "The flavor of the report, like 'network-error' or 'hpkp'.",
+      "type": "string"
+    },
+    "url": {
+      "description": "The URL that caused the report to be generated.",
+      "type": "string"
+    },
+    "user_agent": {
+      "description": "The name of the User-Agent used at the time of loading the original URL which caused the report to be generated. This may differ from the User-Agent used in the HTTP request that sent the report due to factors like the original fetch using the \"request desktop site\" feature.\n",
+      "type": "string"
+    },
+    "body": {
+      "type": "object",
+      "description": "The body of the report, with details on what failed and how.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "properties": {
+        "referrer": {
+          "type": "string",
+          "description": "The HTTP Referer header that was sent with the request that failed.\n"
+        },
+        "sampling_fraction": {
+          "type": "number",
+          "description": "The sampling_fraction originally requested by the origin server in its NEL response header.\n"
+        },
+        "server_ip": {
+          "type": "string",
+          "description": "Either the IP address of the server to which the user agent sent the failed request, or \"\".\n"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "If available, this is the network protocol used to fetch the request that failed, as identified by the ALPN Protocol ID, or \"\".\n"
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method name used when attempting to fetch the failed request (e.g. \"GET\", \"POST\", etc)\n"
+        },
+        "status_code": {
+          "type": "integer",
+          "description": "Either the HTTP response code of the failed request, or 0 if not applicable.\n"
+        },
+        "elapsed_time": {
+          "type": "number",
+          "description": "In a network-error report, this is the number of milliseconds between the start of the failed request and when it was completed or aborted by the user agent.\n"
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "dns",
+            "connection",
+            "application"
+          ],
+          "description": "The phase at which the request failed.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "A string describing the kind of failure that occurred, like \"dns.unreachable\", \"tcp.refused\", \"http.response.redirect_loop\", etc. See https://w3c.github.io/network-error-logging/#predefined-network-error-types\n"
+        }
+      }
+    }
+  }
+}
