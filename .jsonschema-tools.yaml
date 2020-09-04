@@ -4,3 +4,6 @@ ignoreSchemas:
   # This legacy schema has polymorphic nullable types, which we no longer allow.
   # Exclude it from tests.
   - /mediawiki/recentchange/1.0.0
+# Temporarily disable numeric bounds enforcement until we are ready to rematerialize
+# all schemas with enforced numeric bounds. T258659
+enforcedNumericBounds: false
