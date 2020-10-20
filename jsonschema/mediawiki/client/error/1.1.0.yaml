@@ -1,10 +1,12 @@
-title: api-gateway/request
-description: A single request to the API Gateway
-$id: /api-gateway/request/1.0.0
-$schema: 'https://json-schema.org/draft-07/schema#'
+title: mediawiki/client/error
+description: An error generated in a client runtime.
+$id: /mediawiki/client/error/1.1.0
+$schema: 'http://json-schema.org/draft-07/schema#'
 type: object
+additionalProperties: false
 required:
   - $schema
+  - message
   - meta
 properties:
   $schema:
@@ -39,7 +41,7 @@ properties:
         type: string
         minLength: 1
       stream:
-        description: Name of the stream/queue/dataset that this event belongs in
+        description: Name of the stream (dataset) that this event belongs in
         type: string
         minLength: 1
   http:
@@ -67,28 +69,45 @@ properties:
         type: object
         additionalProperties:
           type: string
-      client_ip:
-        description: >-
-          The http client's IP address, usually set from the X-Client-IP header,
-          the value of which is extracted from X-Forwarded-For.
-        type: string
-  backend_time_ms:
-    description: Elapsed milliseconds to process request by the backend service
-    type: integer
-  total_time_ms:
-    description: Total elapsed milliseconds to process request
-    type: integer
-  client_id:
-    description: The client_id for OAuth2 authenticated clients
+  error_class:
+    description: Name of constructor e.g. Error or ReferenceError.
     type: string
-  route:
-    description: The name of the request route
+  message:
+    description: Message explaining what happened.
     type: string
+  url:
+    description: URL of page on which the error occurred.
+    type: string
+  file_url:
+    description: URL of the file where the error occurred.
+    type: string
+  stack_trace:
+    description: Stack trace string.
+    type: string
+  tags:
+    type: object
+    maxProperties: 32
+    description: |
+      Arbitrary extra data. Typically includes:
+      - version: MediaWiki branch name
+      - wiki: wiki ID
+      - skin: skin name
+      - user_language: user language
+      - action: action (e.g. view, edit)
+      - namespace: namespace where the error occured
+      - page_title: title of page where the error occured
+      - user_groups: comma-separated list of user groups
+      - debug: truthy when ResourceLoader debug mode was enabled
+    additionalProperties:
+      type: string
 examples:
-  - $schema: /api-gateway/request/1.0.0
+  - $schema: /mediawiki/client/error/1.1.0
     meta:
-      dt: '2020-07-01T00:00:00Z'
-      stream: example_stream
-    backend_time_ms: 2
-    total_time_ms: 3
-    client_id: test_client
+      stream: mediawiki.client.error
+      dt: '2019-01-01T00:00:00Z'
+    error_class: Error
+    message: example error message
+    url: 'http://en.wikipedia.org'
+    file_url: index.js
+    tags:
+      page_title: Main_Page

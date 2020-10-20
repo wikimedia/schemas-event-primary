@@ -1,25 +1,31 @@
 {
-  "title": "api-gateway/request",
-  "description": "A single request to the API Gateway",
-  "$id": "/api-gateway/request/1.0.0",
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "mediawiki/client/error",
+  "description": "An error generated in a client runtime.",
+  "$id": "/mediawiki/client/error/1.1.0",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "examples": [
     {
-      "$schema": "/api-gateway/request/1.0.0",
+      "$schema": "/mediawiki/client/error/1.1.0",
       "meta": {
-        "dt": "2020-07-01T00:00:00Z",
-        "stream": "example_stream"
+        "stream": "mediawiki.client.error",
+        "dt": "2019-01-01T00:00:00Z"
       },
-      "backend_time_ms": 2,
-      "total_time_ms": 3,
-      "client_id": "test_client"
+      "error_class": "Error",
+      "message": "example error message",
+      "url": "http://en.wikipedia.org",
+      "file_url": "index.js",
+      "tags": {
+        "page_title": "Main_Page"
+      }
     }
   ],
   "required": [
     "$schema",
+    "message",
     "meta"
   ],
+  "additionalProperties": false,
   "properties": {
     "$schema": {
       "type": "string",
@@ -59,7 +65,7 @@
         },
         "stream": {
           "type": "string",
-          "description": "Name of the stream/queue/dataset that this event belongs in",
+          "description": "Name of the stream (dataset) that this event belongs in",
           "minLength": 1
         }
       }
@@ -96,28 +102,36 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "client_ip": {
-          "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
-          "type": "string"
         }
       }
     },
-    "backend_time_ms": {
-      "type": "integer",
-      "description": "Elapsed milliseconds to process request by the backend service"
-    },
-    "total_time_ms": {
-      "type": "integer",
-      "description": "Total elapsed milliseconds to process request"
-    },
-    "client_id": {
+    "error_class": {
       "type": "string",
-      "description": "The client_id for OAuth2 authenticated clients"
+      "description": "Name of constructor e.g. Error or ReferenceError."
     },
-    "route": {
+    "message": {
       "type": "string",
-      "description": "The name of the request route"
+      "description": "Message explaining what happened."
+    },
+    "url": {
+      "type": "string",
+      "description": "URL of page on which the error occurred."
+    },
+    "file_url": {
+      "type": "string",
+      "description": "URL of the file where the error occurred."
+    },
+    "stack_trace": {
+      "type": "string",
+      "description": "Stack trace string."
+    },
+    "tags": {
+      "type": "object",
+      "maxProperties": 32,
+      "description": "Arbitrary extra data. Typically includes:\n- version: MediaWiki branch name\n- wiki: wiki ID\n- skin: skin name\n- user_language: user language\n- action: action (e.g. view, edit)\n- namespace: namespace where the error occured\n- page_title: title of page where the error occured\n- user_groups: comma-separated list of user groups\n- debug: truthy when ResourceLoader debug mode was enabled\n",
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   }
 }

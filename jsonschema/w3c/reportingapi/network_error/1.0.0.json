@@ -139,6 +139,10 @@
     "http": {
       "type": "object",
       "properties": {
+        "protocol": {
+          "description": "The protocol used for the request (HTTP or HTTPS)",
+          "type": "string"
+        },
         "method": {
           "description": "The HTTP request method (GET, POST, etc.)",
           "type": "string"
@@ -146,10 +150,6 @@
         "status_code": {
           "description": "The HTTP status code returned for this request (when known)",
           "type": "integer"
-        },
-        "client_ip": {
-          "description": "The http client's IP address",
-          "type": "string"
         },
         "has_cookies": {
           "description": "True if the http request has any cookies set",
@@ -168,6 +168,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "client_ip": {
+          "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
+          "type": "string"
         }
       }
     },

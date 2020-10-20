@@ -13,7 +13,8 @@ $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
   - $ref: /fragment/common/1.0.0#
-  - $ref: /fragment/http/1.0.0#
+  - $ref: /fragment/http/1.2.0#
+  - $ref: /fragment/http/client_ip/1.0.0#
   - properties:
       age:
         type: number
