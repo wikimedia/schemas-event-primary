@@ -1,4 +1,4 @@
-'Primary' event JSONSchemas for Wikimedia & Mediawiki event data.
+'Primary' event JSONSchemas for Wikimedia & MediaWiki event data.
 
 This schema repository contains event schemas that directly affect
 user-facing features.  These schemas are meant to represent 'tier 1' events.
