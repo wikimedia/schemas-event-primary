@@ -1,13 +1,13 @@
 title: fragment/mediawiki/common
 description: Common schema fields for all Mediawiki entities
-$id: /fragment/mediawiki/common/1.0.0
+$id: /fragment/mediawiki/common/2.0.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 # Use allOf so that common schemas are fully merged by
 # jsonschema-tools along with their required fields.
 allOf:
     ### global event fields
-  - $ref: /fragment/common/1.0.0#
+  - $ref: /fragment/common/1.1.0#
     ### Mediawiki entity fields.
   - properties:
       database:
@@ -53,9 +53,5 @@ allOf:
               Not present for anonymous users.
             type: integer
             minimum: 0
-        required:
-          - user_text
-          - user_groups
-          - user_is_bot
-    required:
-      - database
+
+
