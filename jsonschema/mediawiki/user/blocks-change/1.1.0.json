@@ -128,7 +128,9 @@
       "properties": {
         "user_id": {
           "description": "The user id that performed this change.  This is optional, and will not be present for anonymous users.\n",
-          "type": "integer"
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         },
         "user_text": {
           "description": "The text representation of the user that performed this change.",
@@ -156,7 +158,8 @@
         "user_edit_count": {
           "description": "The number of edits this user has made at the time of this event. Not present for anonymous users.\n",
           "type": "integer",
-          "minimum": 0
+          "minimum": 0,
+          "maximum": 9007199254740991
         }
       }
     },
@@ -166,7 +169,9 @@
     },
     "user_id": {
       "description": "The user id for the target user.  This is optional, and will not be present for anonymous users.\n",
-      "type": "integer"
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "user_text": {
       "description": "The text representation of the target user.",
@@ -237,7 +242,9 @@
               },
               "value": {
                 "type": "integer",
-                "description": "Namespace ID for namespace restrictions, page ID for page restrictions.\n"
+                "description": "Namespace ID for namespace restrictions, page ID for page restrictions.\n",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
               }
             }
           }
@@ -304,7 +311,9 @@
                   },
                   "value": {
                     "type": "integer",
-                    "description": "Namespace ID for namespace restrictions, page ID for page restrictions.\n"
+                    "description": "Namespace ID for namespace restrictions, page ID for page restrictions.\n",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
                   }
                 }
               }

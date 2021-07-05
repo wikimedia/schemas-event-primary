@@ -76,7 +76,9 @@
     },
     "page_namespace": {
       "description": "the namespace of the page that the job was triggered for",
-      "type": "integer"
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "page_title": {
       "description": "the title of the page that the job was triggered for",

@@ -13,59 +13,64 @@ properties:
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
     type: string
+  database:
+    description: The name of the wiki database this event entity belongs to.
+    type: string
+    minLength: 1
   meta:
     type: object
     required:
       - dt
       - stream
     properties:
-      uri:
-        type: string
-        format: uri-reference
-        maxLength: 8192
-        description: Unique URI identifying the event or entity
-      request_id:
-        description: Unique ID of the request that caused the event
-        type: string
-      id:
-        description: Unique ID of this event
-        type: string
-      dt:
-        type: string
-        format: date-time
-        maxLength: 128
-        description: 'UTC event datetime, in ISO-8601 format'
       domain:
         description: Domain the event or entity pertains to
         type: string
         minLength: 1
+      dt:
+        description: 'UTC event datetime, in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      id:
+        description: Unique ID of this event
+        type: string
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
       stream:
         description: Name of the stream (dataset) that this event belongs in
         type: string
         minLength: 1
-  database:
-    description: The name of the wiki database this event entity belongs to.
-    type: string
-    minLength: 1
+      uri:
+        description: Unique URI identifying the event or entity
+        type: string
+        format: uri-reference
+        maxLength: 8192
   performer:
     description: Represents the user that performed this change.
     type: object
     properties:
-      user_id:
+      user_edit_count:
         description: >
-          The user id that performed this change.  This is optional, and will
-          not be present for anonymous users.
+          The number of edits this user has made at the time of this event. Not
+          present for anonymous users.
         type: integer
-      user_text:
-        description: The text representation of the user that performed this change.
-        type: string
-        minLength: 1
+        maximum: 9007199254740991
+        minimum: 0
       user_groups:
         description: 'A list of the groups this user belongs to.  E.g. bot, sysop etc.'
         type: array
         items:
           type: string
           minLength: 1
+      user_id:
+        description: >
+          The user id that performed this change.  This is optional, and will
+          not be present for anonymous users.
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       user_is_bot:
         description: >
           True if this user is considered to be a bot at the time of this event.
@@ -79,9 +84,7 @@ properties:
         type: string
         format: date-time
         maxLength: 128
-      user_edit_count:
-        description: >
-          The number of edits this user has made at the time of this event. Not
-          present for anonymous users.
-        type: integer
-        minimum: 0
+      user_text:
+        description: The text representation of the user that performed this change.
+        type: string
+        minLength: 1

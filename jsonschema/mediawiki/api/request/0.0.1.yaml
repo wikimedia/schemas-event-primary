@@ -64,6 +64,8 @@ properties:
   backend_time_ms:
     description: Elapsed milliseconds to process request as measured by MediaWiki
     type: integer
+    maximum: 9007199254740991
+    minimum: -9007199254740991
   api_error_codes:
     description: >
       List of error codes for any errors encountered, e.g.

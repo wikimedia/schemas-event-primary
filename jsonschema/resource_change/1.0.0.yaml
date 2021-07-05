@@ -18,41 +18,30 @@ properties:
       - dt
       - stream
     properties:
-      uri:
-        type: string
-        format: uri-reference
-        maxLength: 8192
-        description: Unique URI identifying the event or entity
-      request_id:
-        description: Unique ID of the request that caused the event
-        type: string
-      id:
-        description: Unique ID of this event
-        type: string
-      dt:
-        type: string
-        format: date-time
-        maxLength: 128
-        description: 'UTC event datetime, in ISO-8601 format'
       domain:
         description: Domain the event or entity pertains to
         type: string
         minLength: 1
+      dt:
+        description: 'UTC event datetime, in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      id:
+        description: Unique ID of this event
+        type: string
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
       stream:
         description: Name of the stream/queue/dataset that this event belongs in
         type: string
         minLength: 1
-  tags:
-    type: array
-    uniqueItems: true
-    description: the list of tags associated with the change event for the resource
-    items:
-      type: string
-  triggered_by:
-    description: >
-      comma-separated list of event descriptions in `<topic>:<uri>` format, that
-      represent a chain of events that caused this event to be emitted.
-    type: string
+      uri:
+        description: Unique URI identifying the event or entity
+        type: string
+        format: uri-reference
+        maxLength: 8192
   root_event:
     description: Unique identifier of the root event that triggered this event creation
     type: object
@@ -68,9 +57,20 @@ properties:
       signature:
         description: the unique signature of root event
         type: string
+  tags:
+    description: the list of tags associated with the change event for the resource
+    type: array
+    items:
+      type: string
+    uniqueItems: true
+  triggered_by:
+    description: >
+      comma-separated list of event descriptions in `<topic>:<uri>` format, that
+      represent a chain of events that caused this event to be emitted.
+    type: string
 examples:
   - $schema: /resource_change/1.0.0
     meta:
-      stream: resource_change_example
       dt: '2020-07-01T00:00:00Z'
+      stream: resource_change_example
       uri: /example/resource/uri

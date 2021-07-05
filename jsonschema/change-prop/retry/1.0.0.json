@@ -75,7 +75,9 @@
     },
     "retries_left": {
       "type": "integer",
-      "description": "number of retry attempts left for this event"
+      "description": "number of retry attempts left for this event",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "original_event": {
       "type": "object",

@@ -79,7 +79,9 @@
     },
     "namespace": {
       "description": "ID of relevant namespace of affected page (rc_namespace, page_namespace). This is -1 (\"Special\") for log events.\n",
-      "type": "integer"
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "comment": {
       "description": "(rc_comment)",
@@ -91,7 +93,9 @@
     },
     "timestamp": {
       "description": "Unix timestamp (derived from rc_timestamp).",
-      "type": "integer"
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "user": {
       "description": "(rc_user_text)",

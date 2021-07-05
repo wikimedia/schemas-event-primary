@@ -89,7 +89,8 @@
     "sequence_num": {
       "type": "integer",
       "minimum": 1,
-      "description": "Number of this continuation event in the current sequence."
+      "description": "Number of this continuation event in the current sequence.",
+      "maximum": 9007199254740991
     }
   }
 }

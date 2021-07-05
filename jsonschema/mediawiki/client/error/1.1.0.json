@@ -28,8 +28,8 @@
   "additionalProperties": false,
   "properties": {
     "$schema": {
-      "type": "string",
-      "description": "A URI identifying the JSONSchema for this event. This should match an schema's $id in a schema repository. E.g. /schema/title/1.0.0\n"
+      "description": "A URI identifying the JSONSchema for this event. This should match an schema's $id in a schema repository. E.g. /schema/title/1.0.0\n",
+      "type": "string"
     },
     "meta": {
       "type": "object",
@@ -38,56 +38,52 @@
         "stream"
       ],
       "properties": {
-        "uri": {
+        "domain": {
+          "description": "Domain the event or entity pertains to",
           "type": "string",
-          "format": "uri-reference",
-          "maxLength": 8192,
-          "description": "Unique URI identifying the event or entity"
-        },
-        "request_id": {
-          "type": "string",
-          "description": "Unique ID of the request that caused the event"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique ID of this event"
+          "minLength": 1
         },
         "dt": {
+          "description": "UTC event datetime, in ISO-8601 format",
           "type": "string",
           "format": "date-time",
-          "maxLength": 128,
-          "description": "UTC event datetime, in ISO-8601 format"
+          "maxLength": 128
         },
-        "domain": {
-          "type": "string",
-          "description": "Domain the event or entity pertains to",
-          "minLength": 1
+        "id": {
+          "description": "Unique ID of this event",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Unique ID of the request that caused the event",
+          "type": "string"
         },
         "stream": {
-          "type": "string",
           "description": "Name of the stream (dataset) that this event belongs in",
+          "type": "string",
           "minLength": 1
+        },
+        "uri": {
+          "description": "Unique URI identifying the event or entity",
+          "type": "string",
+          "format": "uri-reference",
+          "maxLength": 8192
         }
       }
     },
     "http": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "description": "The protocol used for the request (HTTP or HTTPS)",
-          "type": "string"
+        "has_cookies": {
+          "description": "True if the http request has any cookies set",
+          "type": "boolean"
         },
         "method": {
           "description": "The HTTP request method (GET, POST, etc.)",
           "type": "string"
         },
-        "status_code": {
-          "description": "The HTTP status code returned for this request (when known)",
-          "type": "integer"
-        },
-        "has_cookies": {
-          "description": "True if the http request has any cookies set",
-          "type": "boolean"
+        "protocol": {
+          "description": "The protocol used for the request (HTTP or HTTPS)",
+          "type": "string"
         },
         "request_headers": {
           "description": "Request headers sent by the client.  E.g. user-agent, etc.",
@@ -102,6 +98,12 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "status_code": {
+          "description": "The HTTP status code returned for this request (when known)",
+          "type": "integer",
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991
         }
       }
     },

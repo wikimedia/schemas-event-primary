@@ -14,20 +14,64 @@ required:
   - meta
   - start_dt
 properties:
-  start_dt:
-    description: 'The campaign''s start time, in ISO8601 format.'
-    type: string
-    format: date-time
-    maxLength: 128
   $schema:
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
     type: string
+  archived:
+    description: The campaign's archived status.
+    type: boolean
+  banners:
+    description: Banners assigned to this campaign.
+    type: array
+    items:
+      type: string
+  campaign_name:
+    description: The name of the campaign that was created.
+    type: string
   database:
     description: The name of the wiki database this event entity belongs to.
     type: string
     minLength: 1
+  enabled:
+    description: The campaign's enabled status.
+    type: boolean
+  end_dt:
+    description: 'The campaign''s end time, in ISO8601 format.'
+    type: string
+    format: date-time
+    maxLength: 128
+  meta:
+    type: object
+    required:
+      - dt
+      - stream
+    properties:
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      dt:
+        description: 'UTC event datetime, in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      id:
+        description: Unique ID of this event
+        type: string
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      stream:
+        description: Name of the stream/queue/dataset that this event belongs in
+        type: string
+        minLength: 1
+      uri:
+        description: Unique URI identifying the event or entity
+        type: string
+        format: uri-reference
+        maxLength: 8192
   performer:
     description: Represents the user that performed this change.
     type: object
@@ -36,21 +80,26 @@ properties:
       - user_groups
       - user_is_bot
     properties:
-      user_id:
+      user_edit_count:
         description: >
-          The user id that performed this change.  This is optional, and will
-          not be present for anonymous users.
+          The number of edits this user has made at the time of this event. Not
+          present for anonymous users.
         type: integer
-      user_text:
-        description: The text representation of the user that performed this change.
-        type: string
-        minLength: 1
+        maximum: 9007199254740991
+        minimum: 0
       user_groups:
         description: 'A list of the groups this user belongs to.  E.g. bot, sysop etc.'
         type: array
         items:
           type: string
           minLength: 1
+      user_id:
+        description: >
+          The user id that performed this change.  This is optional, and will
+          not be present for anonymous users.
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       user_is_bot:
         description: >
           True if this user is considered to be a bot at the time of this event.
@@ -64,74 +113,28 @@ properties:
         type: string
         format: date-time
         maxLength: 128
-      user_edit_count:
-        description: >
-          The number of edits this user has made at the time of this event. Not
-          present for anonymous users.
-        type: integer
-        minimum: 0
-  campaign_name:
-    description: The name of the campaign that was created.
-    type: string
-  meta:
-    type: object
-    required:
-      - dt
-      - stream
-    properties:
-      uri:
-        type: string
-        format: uri-reference
-        maxLength: 8192
-        description: Unique URI identifying the event or entity
-      request_id:
-        description: Unique ID of the request that caused the event
-        type: string
-      id:
-        description: Unique ID of this event
-        type: string
-      dt:
-        type: string
-        format: date-time
-        maxLength: 128
-        description: 'UTC event datetime, in ISO-8601 format'
-      domain:
-        description: Domain the event or entity pertains to
+      user_text:
+        description: The text representation of the user that performed this change.
         type: string
         minLength: 1
-      stream:
-        description: Name of the stream/queue/dataset that this event belongs in
-        type: string
-        minLength: 1
-  end_dt:
-    description: 'The campaign''s end time, in ISO8601 format.'
+  start_dt:
+    description: 'The campaign''s start time, in ISO8601 format.'
     type: string
     format: date-time
     maxLength: 128
-  enabled:
-    description: The campaign's enabled status.
-    type: boolean
-  archived:
-    description: The campaign's archived status.
-    type: boolean
-  banners:
-    description: Banners assigned to this campaign.
-    type: array
-    items:
-      type: string
   summary:
     description: The summary provided for campaign creation.
     type: string
 examples:
   - $schema: /mediawiki/centralnotice/campaign/create/1.0.0
-    meta:
-      dt: '2020-07-01T00:00:00Z'
-      stream: example_stream
-    database: examplewiki
-    campaign_name: example
-    start_dt: '2020-07-01T00:00:00Z'
-    end_dt: '2020-07-02T00:00:00Z'
-    enabled: false
     archived: true
     banners:
       - example
+    campaign_name: example
+    database: examplewiki
+    enabled: false
+    end_dt: '2020-07-02T00:00:00Z'
+    meta:
+      dt: '2020-07-01T00:00:00Z'
+      stream: example_stream
+    start_dt: '2020-07-01T00:00:00Z'

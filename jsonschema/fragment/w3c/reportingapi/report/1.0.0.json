@@ -55,21 +55,17 @@
     "http": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "description": "The protocol used for the request (HTTP or HTTPS)",
-          "type": "string"
+        "has_cookies": {
+          "description": "True if the http request has any cookies set",
+          "type": "boolean"
         },
         "method": {
           "description": "The HTTP request method (GET, POST, etc.)",
           "type": "string"
         },
-        "status_code": {
-          "description": "The HTTP status code returned for this request (when known)",
-          "type": "integer"
-        },
-        "has_cookies": {
-          "description": "True if the http request has any cookies set",
-          "type": "boolean"
+        "protocol": {
+          "description": "The protocol used for the request (HTTP or HTTPS)",
+          "type": "string"
         },
         "request_headers": {
           "description": "Request headers sent by the client.  E.g. user-agent, etc.",
@@ -85,6 +81,12 @@
             "type": "string"
           }
         },
+        "status_code": {
+          "description": "The HTTP status code returned for this request (when known)",
+          "type": "integer",
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991
+        },
         "client_ip": {
           "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
           "type": "string"
@@ -93,7 +95,9 @@
     },
     "age": {
       "type": "number",
-      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n"
+      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "type": {
       "type": "string",

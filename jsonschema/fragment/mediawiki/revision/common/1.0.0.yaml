@@ -66,6 +66,8 @@ properties:
           The user id that performed this change.  This is optional, and will
           not be present for anonymous users.
         type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       user_text:
         description: The text representation of the user that performed this change.
         type: string
@@ -94,10 +96,12 @@ properties:
           The number of edits this user has made at the time of this event. Not
           present for anonymous users.
         type: integer
+        maximum: 9007199254740991
         minimum: 0
   page_id:
     description: The page ID of the page this revision belongs to.
     type: integer
+    maximum: 9007199254740991
     minimum: 1
   page_title:
     description: The normalized title of the page this revision belongs to.
@@ -106,6 +110,8 @@ properties:
   page_namespace:
     description: The namespace of the page this revision belongs to.
     type: integer
+    maximum: 9007199254740991
+    minimum: -9007199254740991
   page_is_redirect:
     description: >
       True if this revision is a redirect.  This fact is ultimately represented
@@ -115,10 +121,12 @@ properties:
   rev_id:
     description: The (database) revision ID.
     type: integer
+    maximum: 9007199254740991
     minimum: 0
   rev_parent_id:
     description: The parent revison ID of the revision that this event represents.
     type: integer
+    maximum: 9007199254740991
     minimum: 0
   rev_timestamp:
     description: >

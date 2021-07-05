@@ -90,7 +90,9 @@
     },
     "backend_time_ms": {
       "type": "integer",
-      "description": "Elapsed milliseconds to process request as measured by MediaWiki"
+      "description": "Elapsed milliseconds to process request as measured by MediaWiki",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "api_error_codes": {
       "type": "array",

@@ -67,21 +67,17 @@
     "http": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "description": "The protocol used for the request (HTTP or HTTPS)",
-          "type": "string"
+        "has_cookies": {
+          "description": "True if the http request has any cookies set",
+          "type": "boolean"
         },
         "method": {
           "description": "The HTTP request method (GET, POST, etc.)",
           "type": "string"
         },
-        "status_code": {
-          "description": "The HTTP status code returned for this request (when known)",
-          "type": "integer"
-        },
-        "has_cookies": {
-          "description": "True if the http request has any cookies set",
-          "type": "boolean"
+        "protocol": {
+          "description": "The protocol used for the request (HTTP or HTTPS)",
+          "type": "string"
         },
         "request_headers": {
           "description": "Request headers sent by the client.  E.g. user-agent, etc.",
@@ -97,6 +93,12 @@
             "type": "string"
           }
         },
+        "status_code": {
+          "description": "The HTTP status code returned for this request (when known)",
+          "type": "integer",
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991
+        },
         "client_ip": {
           "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
           "type": "string"
@@ -105,11 +107,15 @@
     },
     "backend_time_ms": {
       "type": "integer",
-      "description": "Elapsed milliseconds to process request by the backend service"
+      "description": "Elapsed milliseconds to process request by the backend service",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "total_time_ms": {
       "type": "integer",
-      "description": "Total elapsed milliseconds to process request"
+      "description": "Total elapsed milliseconds to process request",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "client_id": {
       "type": "string",

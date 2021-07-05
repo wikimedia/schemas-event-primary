@@ -149,7 +149,9 @@
         },
         "status_code": {
           "description": "The HTTP status code returned for this request (when known)",
-          "type": "integer"
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         },
         "has_cookies": {
           "description": "True if the http request has any cookies set",
@@ -177,7 +179,9 @@
     },
     "age": {
       "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n",
-      "type": "number"
+      "type": "number",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
     },
     "type": {
       "description": "The flavor of the report, like 'network-error' or 'hpkp'.",
@@ -204,7 +208,9 @@
         },
         "sampling_fraction": {
           "type": "number",
-          "description": "The sampling_fraction originally requested by the origin server in its NEL response header.\n"
+          "description": "The sampling_fraction originally requested by the origin server in its NEL response header.\n",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         },
         "server_ip": {
           "type": "string",
@@ -220,11 +226,15 @@
         },
         "status_code": {
           "type": "integer",
-          "description": "Either the HTTP response code of the failed request, or 0 if not applicable.\n"
+          "description": "Either the HTTP response code of the failed request, or 0 if not applicable.\n",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         },
         "elapsed_time": {
           "type": "number",
-          "description": "In a network-error report, this is the number of milliseconds between the start of the failed request and when it was completed or aborted by the user agent.\n"
+          "description": "In a network-error report, this is the number of milliseconds between the start of the failed request and when it was completed or aborted by the user agent.\n",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
         },
         "phase": {
           "type": "string",

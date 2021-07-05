@@ -65,6 +65,8 @@ properties:
           The user id that performed this change.  This is optional, and will
           not be present for anonymous users.
         type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       user_text:
         description: The text representation of the user that performed this change.
         type: string
@@ -93,10 +95,12 @@ properties:
           The number of edits this user has made at the time of this event. Not
           present for anonymous users.
         type: integer
+        maximum: 9007199254740991
         minimum: 0
   page_id:
     description: The (database) page ID.
     type: integer
+    maximum: 9007199254740991
     minimum: 0
   page_title:
     description: The normalized title of the page.
@@ -105,6 +109,8 @@ properties:
   page_namespace:
     description: The namespace ID this page belongs to.
     type: integer
+    maximum: 9007199254740991
+    minimum: -9007199254740991
   page_is_redirect:
     description: >
       True if this page is currently a redirect page.  This fact is ultimately
@@ -115,4 +121,5 @@ properties:
   rev_id:
     description: The head revision of the page at the time of this event.
     type: integer
+    maximum: 9007199254740991
     minimum: 0
