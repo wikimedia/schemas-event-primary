@@ -99,3 +99,26 @@ properties:
       User-Agent used in the HTTP request that sent the report due to factors
       like the original fetch using the "request desktop site" feature.
     type: string
+examples:
+  - $schema: /fragment/w3c/reportingapi/report/1.0.0
+    type: dolor
+    age: -6305039478318694
+    http:
+      client_ip: dolor
+      has_cookies: false
+      method: dolor
+      protocol: dolor
+      request_headers:
+        dolorb: dolor
+      response_headers:
+        dolorb: dolor
+      status_code: -6305039478318694
+    meta:
+      domain: dolor
+      dt: '2021-01-01T00:00:00.0Z'
+      id: dolor
+      request_id: dolor
+      stream: dolor
+      uri: 'http://example.org'
+    url: dolor
+    user_agent: dolor

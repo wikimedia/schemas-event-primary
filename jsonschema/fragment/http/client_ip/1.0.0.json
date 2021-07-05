@@ -14,5 +14,12 @@
         }
       }
     }
-  }
+  },
+  "examples": [
+    {
+      "http": {
+        "client_ip": "dolor"
+      }
+    }
+  ]
 }

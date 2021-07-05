@@ -125,3 +125,28 @@ properties:
     type: string
     format: date-time
     maxLength: 128
+examples:
+  - $schema: /fragment/mediawiki/revision/common/2.0.0
+    database: dolor
+    meta:
+      domain: dolor
+      dt: '2021-01-01T00:00:00.0Z'
+      id: dolor
+      request_id: dolor
+      stream: dolor
+      uri: 'http://example.org'
+    page_id: 1351079888211149
+    page_is_redirect: false
+    page_namespace: -6305039478318694
+    page_title: dolor
+    performer:
+      user_edit_count: 1351079888211148
+      user_groups:
+        - dolor
+      user_id: -6305039478318694
+      user_is_bot: false
+      user_registration_dt: '2021-01-01T00:00:00.0Z'
+      user_text: dolor
+    rev_id: 1351079888211148
+    rev_parent_id: 1351079888211148
+    rev_timestamp: '2021-01-01T00:00:00.0Z'

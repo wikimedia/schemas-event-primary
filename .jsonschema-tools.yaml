@@ -1,5 +1,6 @@
 schemaBasePath: ./jsonschema/
 logLevel: info
+shouldGenerateExample: true
 skipSchemaTestCases:
   # /mediawiki/recentchange legacy schema has polymorphic
   # nullable types, skip the monomorphic types test case.

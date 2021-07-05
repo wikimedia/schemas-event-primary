@@ -111,5 +111,35 @@
       "type": "string",
       "description": "The name of the User-Agent used at the time of loading the original URL which caused the report to be generated. This may differ from the User-Agent used in the HTTP request that sent the report due to factors like the original fetch using the \"request desktop site\" feature.\n"
     }
-  }
+  },
+  "examples": [
+    {
+      "$schema": "/fragment/w3c/reportingapi/report/1.0.0",
+      "meta": {
+        "dt": "2021-01-01T00:00:00.0Z",
+        "stream": "dolor",
+        "request_id": "dolor",
+        "id": "dolor",
+        "domain": "dolor",
+        "uri": "http://example.org"
+      },
+      "age": -6305039478318694,
+      "type": "dolor",
+      "url": "dolor",
+      "user_agent": "dolor",
+      "http": {
+        "client_ip": "dolor",
+        "protocol": "dolor",
+        "request_headers": {
+          "dolorb": "dolor"
+        },
+        "response_headers": {
+          "dolorb": "dolor"
+        },
+        "status_code": -6305039478318694,
+        "has_cookies": false,
+        "method": "dolor"
+      }
+    }
+  ]
 }

@@ -97,65 +97,34 @@
       "description": "A URI identifying the JSONSchema for this event. This should match an schema's $id in a schema repository. E.g. /schema/title/1.0.0\n",
       "type": "string"
     },
-    "meta": {
-      "type": "object",
-      "required": [
-        "dt",
-        "stream"
-      ],
-      "properties": {
-        "uri": {
-          "type": "string",
-          "format": "uri-reference",
-          "maxLength": 8192,
-          "description": "Unique URI identifying the event or entity"
-        },
-        "request_id": {
-          "description": "Unique ID of the request that caused the event",
-          "type": "string"
-        },
-        "id": {
-          "description": "Unique ID of this event",
-          "type": "string"
-        },
-        "dt": {
-          "type": "string",
-          "format": "date-time",
-          "maxLength": 128,
-          "description": "UTC event datetime, in ISO-8601 format"
-        },
-        "domain": {
-          "description": "Domain the event or entity pertains to",
-          "type": "string",
-          "minLength": 1
-        },
-        "stream": {
-          "description": "Name of the stream/queue/dataset that this event belongs in",
-          "type": "string",
-          "minLength": 1
-        }
-      }
+    "type": {
+      "description": "The flavor of the report, like 'network-error' or 'hpkp'.",
+      "type": "string"
+    },
+    "age": {
+      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n",
+      "type": "number",
+      "maximum": 9007199254740991,
+      "minimum": -9007199254740991
     },
     "http": {
       "type": "object",
       "properties": {
-        "protocol": {
-          "description": "The protocol used for the request (HTTP or HTTPS)",
+        "client_ip": {
+          "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
           "type": "string"
+        },
+        "has_cookies": {
+          "description": "True if the http request has any cookies set",
+          "type": "boolean"
         },
         "method": {
           "description": "The HTTP request method (GET, POST, etc.)",
           "type": "string"
         },
-        "status_code": {
-          "description": "The HTTP status code returned for this request (when known)",
-          "type": "integer",
-          "minimum": -9007199254740991,
-          "maximum": 9007199254740991
-        },
-        "has_cookies": {
-          "description": "True if the http request has any cookies set",
-          "type": "boolean"
+        "protocol": {
+          "description": "The protocol used for the request (HTTP or HTTPS)",
+          "type": "string"
         },
         "request_headers": {
           "description": "Request headers sent by the client.  E.g. user-agent, etc.",
@@ -171,21 +140,52 @@
             "type": "string"
           }
         },
-        "client_ip": {
-          "description": "The http client's IP address, usually set from the X-Client-IP header, the value of which is extracted from X-Forwarded-For.",
-          "type": "string"
+        "status_code": {
+          "description": "The HTTP status code returned for this request (when known)",
+          "type": "integer",
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991
         }
       }
     },
-    "age": {
-      "description": "The number of milliseconds between the report's timestamp and the time the report was sent.\n",
-      "type": "number",
-      "minimum": -9007199254740991,
-      "maximum": 9007199254740991
-    },
-    "type": {
-      "description": "The flavor of the report, like 'network-error' or 'hpkp'.",
-      "type": "string"
+    "meta": {
+      "type": "object",
+      "required": [
+        "dt",
+        "stream"
+      ],
+      "properties": {
+        "domain": {
+          "description": "Domain the event or entity pertains to",
+          "type": "string",
+          "minLength": 1
+        },
+        "dt": {
+          "description": "UTC event datetime, in ISO-8601 format",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 128
+        },
+        "id": {
+          "description": "Unique ID of this event",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "Unique ID of the request that caused the event",
+          "type": "string"
+        },
+        "stream": {
+          "description": "Name of the stream/queue/dataset that this event belongs in",
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "description": "Unique URI identifying the event or entity",
+          "type": "string",
+          "format": "uri-reference",
+          "maxLength": 8192
+        }
+      }
     },
     "url": {
       "description": "The URL that caused the report to be generated.",

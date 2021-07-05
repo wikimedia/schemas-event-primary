@@ -53,5 +53,18 @@
   "required": [
     "$schema",
     "meta"
+  ],
+  "examples": [
+    {
+      "$schema": "/fragment/common/1.1.0",
+      "meta": {
+        "dt": "2021-01-01T00:00:00.0Z",
+        "stream": "dolor",
+        "request_id": "dolor",
+        "id": "dolor",
+        "domain": "dolor",
+        "uri": "http://example.org"
+      }
+    }
   ]
 }

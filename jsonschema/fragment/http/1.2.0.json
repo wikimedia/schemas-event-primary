@@ -42,5 +42,21 @@
         }
       }
     }
-  }
+  },
+  "examples": [
+    {
+      "http": {
+        "method": "dolor",
+        "status_code": -6305039478318694,
+        "has_cookies": false,
+        "request_headers": {
+          "dolorb": "dolor"
+        },
+        "response_headers": {
+          "dolorb": "dolor"
+        },
+        "protocol": "dolor"
+      }
+    }
+  ]
 }

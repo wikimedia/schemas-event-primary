@@ -12,3 +12,6 @@ properties:
           The http client's IP address, usually set from the X-Client-IP header,
           the value of which is extracted from X-Forwarded-For.
         type: string
+examples:
+  - http:
+      client_ip: dolor
