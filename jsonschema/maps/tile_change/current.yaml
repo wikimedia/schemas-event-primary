@@ -26,6 +26,6 @@ examples:
   - $schema: { $ref: "#/$id" }
     meta:
       dt: "2020-04-02T19:11:20.942Z"
-      stream: "maps.tile_expiration"
+      stream: "maps.tile_change"
     tile: "0/0/0"
     state: "expired"
