@@ -1,6 +1,6 @@
 title: mediawiki/revision/create
 description: Represents a MW Revision Create event.
-$id: /mediawiki/revision/create/1.1.0
+$id: /mediawiki/revision/create/1.2.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
@@ -92,6 +92,20 @@ allOf:
           - rev_is_exact_revert
           - rev_reverted_revs
 
+      rev_slots:
+        description: >
+          The revision slots attached to this revision.
+        type: object
+        ### the mix of properties and additionalProperties allows to guarantee that the "main" slot is always present
+        ### while still allowing side-slots (like "mediainfo" on commons) to appear
+        properties:
+          main:
+            $ref: /fragment/mediawiki/revision/slot/1.0.0#
+        additionalProperties:
+          $ref: /fragment/mediawiki/revision/slot/1.0.0#
+        required:
+          - main
+
 examples:
   - $schema: { $ref: '#/$id' }
     meta:
@@ -124,6 +138,12 @@ examples:
     rev_parent_id: 122
     rev_content_changed: true
     rev_is_revert: false
+    rev_slots:
+      main:
+        rev_slot_content_model: wikitext
+        rev_slot_origin_rev_id: 123
+        rev_slot_sha1: 2mx9qnkore72az8niqap1s3ycpu1jej
+        rev_slot_size: 20
   - $schema: { $ref: '#/$id' }
     meta:
       uri: https://examplewiki.wikipedia.org/wiki/TestPage10
@@ -163,3 +183,14 @@ examples:
         - 122
         - 123
       rev_original_rev_id: 121
+    rev_slots:
+      main:
+        rev_slot_content_model: wikitext
+        rev_slot_origin_rev_id: 124
+        rev_slot_sha1: 2mx9qnkore72az8niqap1s3ycpu1jej
+        rev_slot_size: 20
+      mediainfo:
+        rev_slot_content_model: wikibase-mediainfo
+        rev_slot_origin_rev_id: 121
+        rev_slot_sha1: c1a805332a2674c1e2b178dabf1e633122a8d43f
+        rev_slot_size: 1414
