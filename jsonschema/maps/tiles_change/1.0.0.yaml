@@ -17,8 +17,10 @@ properties:
     type: array
     items:
       type: object
+      required:
+        - tile
+        - state
       properties:
-        required: {}
         state:
           description: The state of the map tile
           type: string

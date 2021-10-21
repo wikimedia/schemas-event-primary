@@ -12,6 +12,10 @@
       "maxLength": 1000,
       "items": {
         "type": "object",
+        "required": [
+          "tile",
+          "state"
+        ],
         "properties": {
           "tile": {
             "type": "string",
@@ -26,8 +30,7 @@
               "expired",
               "pregenerated"
             ]
-          },
-          "required": {}
+          }
         }
       }
     },
