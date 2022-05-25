@@ -1,6 +1,6 @@
 title: fragment/common
 description: Common schema fields for event schemas
-$id: /fragment/common/1.1.0
+$id: /fragment/common/2.0.0
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 additionalProperties: false
@@ -32,7 +32,7 @@ properties:
         type: string
         format: date-time
         maxLength: 128
-        description: UTC event datetime, in ISO-8601 format
+        description: Time the event was received by the system, in UTC ISO-8601 format
       domain:
         type: string
         description: Domain the event or entity pertains to
@@ -42,9 +42,17 @@ properties:
         description: Name of the stream (dataset) that this event belongs in
         minLength: 1
     required:
-      - dt
       - stream
+  dt:
+    type: string
+    format: date-time
+    maxLength: 128
+    description: >
+      ISO-8601 formatted timestamp of when the event occurred/was generated
+      in UTC), AKA 'event time'. This is different than meta.dt, which
+      is used as the time the system received this event.
 
 required:
   - $schema
   - meta
+  - dt
