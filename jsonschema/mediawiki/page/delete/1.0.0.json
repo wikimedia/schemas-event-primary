@@ -152,7 +152,7 @@
       "minimum": 0
     },
     "chronology_id": {
-      "description": "Chonology Protector client ID.",
+      "description": "Deprecated - no longer populated",
       "type": "string"
     },
     "comment": {
