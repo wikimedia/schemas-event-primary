@@ -2,7 +2,7 @@ title: mediawiki/recentchange
 description: >
   Represents a MW RecentChange event.
   https://www.mediawiki.org/wiki/Manual:RCFeed
-$id: /mediawiki/recentchange/1.0.0
+$id: /mediawiki/recentchange/1.0.1
 $schema: https://json-schema.org/draft-07/schema#
 type: object
 allOf:
@@ -16,7 +16,7 @@ allOf:
       type:
         description: >
           Type of recentchange event (rc_type). One of "edit", "new", "log",
-          "categorize", or "external". (See Manual:Recentchanges table#rc_type)
+          "categorize", or "external"; or a number. (See Manual:Recentchanges table#rc_type)
         type: string
 
       title:
