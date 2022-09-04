@@ -1,6 +1,6 @@
 title: mediawiki/client/error
 description: An error generated in a client runtime.
-$id: /mediawiki/client/error/1.1.0
+$id: /mediawiki/client/error/2.0.0
 $schema: http://json-schema.org/draft-07/schema#
 type: object
 allOf:
@@ -22,7 +22,11 @@ allOf:
       stack_trace:
         type: string
         description: Stack trace string.
-      tags:
+      error_context:
+        # Note: we need a reasonably unique name for this field, and
+        # one that implies that it's an object. The data is sent to
+        # Logstash, which has no schemas and handles field type
+        # conflicts poorly.
         type: object
         maxProperties: 32
         additionalProperties:
@@ -49,6 +53,6 @@ examples:
     message: example error message
     url: http://en.wikipedia.org
     file_url: index.js
-    tags:
+    error_context:
       page_title: Main_Page
 
