@@ -1,4 +1,8 @@
 schemaBasePath: ./jsonschema/
+
+# Only materialize yaml files.  See TXXXXXX
+contentTypes: [yaml]
+
 logLevel: info
 shouldGenerateExample: true
 skipSchemaTestCases:
