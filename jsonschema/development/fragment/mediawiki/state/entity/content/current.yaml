@@ -2,7 +2,7 @@ title: development/fragment/mediawiki/state/entity/content
 description: >
   Fields for representing MediaWiki page revision content.
 
-$id: /development/fragment/mediawiki/state/entity/content/1.0.0
+$id: /development/fragment/mediawiki/state/entity/content/1.1.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
@@ -34,7 +34,11 @@ properties:
     description: Revision in which this slot was originally created
     minimum: 0
 
-# NOTE:
-# content_body should probably be a field here, but we have not yet
-# fully decided if this should be a main field of this content entity.
-# We will add it later when we start using it.
+  content_body:
+    type: string
+    description: >
+      Content body.
+      NOTE: This field is not required,
+      and is often not set in streams as it can make events very large.
+      It is included here for events that do include the content body.
+

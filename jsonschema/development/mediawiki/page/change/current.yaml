@@ -2,7 +2,7 @@
 # as we iterate on its design.
 title: development/mediawiki/page/change
 description: Represents a MediaWiki page state change in a changelog
-$id: /development/mediawiki/page/change/1.0.0
+$id: /development/mediawiki/page/change/1.1.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
@@ -16,7 +16,7 @@ properties:
     properties:
       # Add the content_slots field as a map type using the entity/revision_slots schema.
       content_slots:
-        $ref: /development/fragment/mediawiki/state/entity/revision_slots/1.0.0
+        $ref: /development/fragment/mediawiki/state/entity/revision_slots/1.1.0
   prior_state:
     type: object
     properties:
@@ -27,7 +27,7 @@ properties:
         $ref: '#/properties/revision'
 
 examples:
-  - $schema: /development/mediawiki/page/change/1.0.0
+  - $schema: { $ref: '#/$id' }
     dt: '2021-01-01T00:00:00.0Z'
     meta:
       domain: examplewiki
