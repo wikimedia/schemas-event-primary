@@ -1,0 +1,253 @@
+title: cirrussearch/update_pipeline/update
+description: Internal event for page updates handled by CirrusSearch
+$id: /cirrussearch/update_pipeline/update/1.0.0
+$schema: 'https://json-schema.org/draft-07/schema#'
+type: object
+required:
+  - operation
+  - namespace_id
+  - page_id
+allOf:
+  - $ref: /fragment/common/2.0.0
+  - $ref: /cirrussearch/fragment/index/1.0.0
+properties:
+  operation:
+    type: string
+    enum:
+      - delete
+      - page_refresh
+      - update_existing
+      - update_revision
+  namespace_id:
+    $ref: /fragment/mediawiki/state/entity/page/2.0.0#/properties/namespace_id
+  page_id:
+    $ref: /fragment/mediawiki/state/entity/page/2.0.0#/properties/page_id
+  page_title:
+    $ref: /fragment/mediawiki/state/entity/page/2.0.0#/properties/page_title
+  wiki_id:
+    $ref: /fragment/mediawiki/state/change/page/1.1.0#/properties/wiki_id
+  rev_id:
+    $ref: /fragment/mediawiki/state/entity/revision/1.0.0#/properties/rev_id
+  domain:
+    description: Domain of the wiki project
+    type: string
+    minLength: 1
+  cirrussearch_noop_hints:
+    type: object
+    description: Handlers for the elastic search super-detect-noop plugin.
+    additionalProperties:
+      type: string
+  cirrussearch_noop_fields:
+    description: Overrides of the fields object for the elastic search super-detect-noop plugin.
+    type: object
+    additionalProperties: false
+    properties:
+      redirect:
+        type: object
+        additionalProperties: false
+        properties:
+          add:
+            $ref: ./#/definitions/redirect_array
+          remove:
+            $ref: ./#/definitions/redirect_array
+          max_size:
+            type: integer
+            maximum: 9007199254740991
+            minimum: 1
+  fields:
+    description: Intermediate document from cirrus search for elastic search, see https://www.mediawiki.org/wiki/Extension:CirrusSearch/Schema
+    type: object
+    required:
+      - page_id
+      - version
+    properties:
+      auxiliary_text:
+        type: array
+        items:
+          type: string
+      category:
+        type: array
+        items:
+          type: string
+      content_model:
+        type: string
+      coordinates:
+        type: array
+        items:
+          type: object
+          properties:
+            coord:
+              type: object
+              additionalProperties:
+                type: number
+            country:
+              type: string
+            dim:
+              type: integer
+              maximum: 9007199254740991
+              minimum: 0
+            globe:
+              type: string
+            name:
+              type: string
+            primary:
+              type: boolean
+            region:
+              type: string
+            type:
+              type: string
+      create_timestamp:
+        description: 'UTC event datetime in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      defaultsort:
+        type: string
+      descriptions:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+      display_title:
+        type: string
+      external_link:
+        type: array
+        items:
+          type: string
+      extra_source:
+        type: string
+      file_bits:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_height:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_media_type:
+        type: string
+      file_mime:
+        type: string
+      file_resolution:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_size:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_text:
+        type: string
+      file_width:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      heading:
+        type: array
+        items:
+          type: string
+      incoming_links:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      labels:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+      language:
+        type: string
+      local_sites_with_dupe:
+        type: array
+        items:
+          type: string
+      namespace:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      namespace_text:
+        type: string
+      opening_text:
+        type: string
+      outgoing_link:
+        type: array
+        items:
+          type: string
+      page_id:
+        description: The page ID of the page this revision belongs to.
+        type: integer
+        maximum: 9007199254740991
+        minimum: 1
+      popularity_score:
+        type: number
+      redirect:
+        type: array
+        items:
+          $ref: ./#/definitions/redirect
+      snapshot:
+        type: string
+      source_text:
+        type: string
+      statement_keywords:
+        type: array
+        items:
+          type: string
+      template:
+        type: array
+        items:
+          type: string
+      text:
+        type: string
+      text_bytes:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      timestamp:
+        description: 'UTC event datetime in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      title:
+        type: string
+      version:
+        description: The (database) revision ID.
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      weighted_tags:
+        type: array
+        items:
+          type: string
+      wiki:
+        type: string
+      wikibase_item:
+        type: string
+definitions:
+  redirect:
+    type: object
+    required:
+      - namespace
+      - title
+    properties:
+      title:
+        type: string
+      namespace:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+  redirect_array:
+    type: array
+    items:
+      type: object
+      required:
+        - namespace
+        - title
+      properties:
+        title:
+          type: string
+        namespace:
+          type: integer
+          maximum: 9007199254740991
+          minimum: 0
