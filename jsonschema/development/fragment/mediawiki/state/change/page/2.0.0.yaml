@@ -1,25 +1,25 @@
-title: development/mediawiki/page/change
-description: Represents a MediaWiki page state change in a changelog
-$id: /development/mediawiki/page/change/1.1.0
+title: development/fragment/mediawiki/state/change/page
+description: >
+  Fragment that represents a MediaWiki page state change in a changelog. This
+  schema can be used in multiple 'enriched' versions of page state changes.
+  E.g., there could be a 'page_change_with_rendered_content' schema that adds
+  fields necessary for representing a change to rendered page content. Because
+  we want this to be reusable, this schema does not attempt to represent
+  revision content (or MCR content 'slots').  If content info is needed, you
+  should add those fields to concrete schema yourself. See the non-fragment
+  mediawiki/page/change schema for working example.
+$id: /development/fragment/mediawiki/state/change/page/2.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
 required:
-  - $schema
   - changelog_kind
-  - dt
-  - meta
-  - page
   - page_change_kind
+  - wiki_id
+  - page
   - performer
   - revision
-  - wiki_id
 properties:
-  $schema:
-    description: >
-      A URI identifying the JSONSchema for this event. This should match an
-      schema's $id in a schema repository. E.g. /schema/title/1.0.0
-    type: string
   changelog_kind:
     description: >
       The kind of this event in a changelog. This is used to map the event to an
@@ -80,43 +80,6 @@ properties:
         page_id: 1351079888211148
         page_title: dolor
         revision_count: 1351079888211148
-  dt:
-    description: >
-      ISO-8601 formatted timestamp of when the event occurred/was generated in
-      UTC), AKA 'event time'. This is different than meta.dt, which is used as
-      the time the system received this event.
-    type: string
-    format: date-time
-    maxLength: 128
-  meta:
-    type: object
-    required:
-      - stream
-    properties:
-      domain:
-        description: Domain the event or entity pertains to
-        type: string
-        minLength: 1
-      dt:
-        description: 'Time the event was received by the system, in UTC ISO-8601 format'
-        type: string
-        format: date-time
-        maxLength: 128
-      id:
-        description: Unique ID of this event
-        type: string
-      request_id:
-        description: Unique ID of the request that caused the event
-        type: string
-      stream:
-        description: Name of the stream (dataset) that this event belongs in
-        type: string
-        minLength: 1
-      uri:
-        description: Unique URI identifying the event or entity
-        type: string
-        format: uri-reference
-        maxLength: 8192
   page:
     title: development/fragment/mediawiki/state/entity/page
     description: Fields for MediaWiki page entity.
@@ -305,71 +268,6 @@ properties:
           comment:
             description: The comment left by the editor when this revision was made.
             type: string
-          content_slots:
-            title: development/fragment/mediawiki/state/entity/revision_slots
-            description: >
-              Map type representing MediaWiki's revision content slots. This map
-              is keyed by the slot role name, e.g. 'main'.
-            $id: /development/fragment/mediawiki/state/entity/revision_slots/1.1.0
-            $schema: 'https://json-schema.org/draft-07/schema#'
-            type: object
-            additionalProperties:
-              title: development/fragment/mediawiki/state/entity/content
-              description: |
-                Fields for representing MediaWiki page revision content.
-              $id: /development/fragment/mediawiki/state/entity/content/1.1.0
-              $schema: 'https://json-schema.org/draft-07/schema#'
-              type: object
-              additionalProperties: false
-              properties:
-                content_body:
-                  description: >
-                    Content body. NOTE: This field is not required, and is often
-                    not set in streams as it can make events very large. It is
-                    included here for events that do include the content body.
-                  type: string
-                content_format:
-                  description: >-
-                    The 'content type' of the content.  E.g. wikitext/html. This
-                    is similiar to a MIME type.
-                  type: string
-                content_model:
-                  description: >-
-                    MediaWiki's content model of this content. E.g. wikitext,
-                    json, etc.
-                  type: string
-                content_sha1:
-                  description: sha1 sum of the content body.
-                  type: string
-                content_size:
-                  description: Byte size of the content body.
-                  type: integer
-                  maximum: 9007199254740991
-                  minimum: 0
-                origin_rev_id:
-                  description: Revision in which this slot was originally created
-                  type: integer
-                  maximum: 9007199254740991
-                  minimum: 0
-                slot_role:
-                  description: Slot role name.
-                  type: string
-              examples:
-                - content_body: dolor
-                  content_format: dolor
-                  content_model: dolor
-                  content_sha1: dolor
-                  content_size: 1351079888211148
-                  origin_rev_id: 1351079888211148
-            examples:
-              - dolorb:
-                  content_body: dolor
-                  content_format: dolor
-                  content_model: dolor
-                  content_sha1: dolor
-                  content_size: 1351079888211148
-                  origin_rev_id: 1351079888211148
-                  slot_role: dolor
           editor:
             title: development/fragment/mediawiki/state/entity/user
             description: Represents the MediaWiki user that made this edit.
@@ -448,8 +346,8 @@ properties:
                 user_text: dolor
           is_comment_visible:
             description: >
-              Whether the comment of the revision is visible. Affects comment
-              and comment_html fields. See RevisionRecord->DELETED_COMMENT.
+              Whether the comment of the revision is visible. See
+              RevisionRecord->DELETED_COMMENT.
             type: boolean
           is_content_visible:
             description: >
@@ -529,71 +427,6 @@ properties:
       comment:
         description: The comment left by the editor when this revision was made.
         type: string
-      content_slots:
-        title: development/fragment/mediawiki/state/entity/revision_slots
-        description: >
-          Map type representing MediaWiki's revision content slots. This map is
-          keyed by the slot role name, e.g. 'main'.
-        $id: /development/fragment/mediawiki/state/entity/revision_slots/1.1.0
-        $schema: 'https://json-schema.org/draft-07/schema#'
-        type: object
-        additionalProperties:
-          title: development/fragment/mediawiki/state/entity/content
-          description: |
-            Fields for representing MediaWiki page revision content.
-          $id: /development/fragment/mediawiki/state/entity/content/1.1.0
-          $schema: 'https://json-schema.org/draft-07/schema#'
-          type: object
-          additionalProperties: false
-          properties:
-            content_body:
-              description: >
-                Content body. NOTE: This field is not required, and is often not
-                set in streams as it can make events very large. It is included
-                here for events that do include the content body.
-              type: string
-            content_format:
-              description: >-
-                The 'content type' of the content.  E.g. wikitext/html. This is
-                similiar to a MIME type.
-              type: string
-            content_model:
-              description: >-
-                MediaWiki's content model of this content. E.g. wikitext, json,
-                etc.
-              type: string
-            content_sha1:
-              description: sha1 sum of the content body.
-              type: string
-            content_size:
-              description: Byte size of the content body.
-              type: integer
-              maximum: 9007199254740991
-              minimum: 0
-            origin_rev_id:
-              description: Revision in which this slot was originally created
-              type: integer
-              maximum: 9007199254740991
-              minimum: 0
-            slot_role:
-              description: Slot role name.
-              type: string
-          examples:
-            - content_body: dolor
-              content_format: dolor
-              content_model: dolor
-              content_sha1: dolor
-              content_size: 1351079888211148
-              origin_rev_id: 1351079888211148
-        examples:
-          - dolorb:
-              content_body: dolor
-              content_format: dolor
-              content_model: dolor
-              content_sha1: dolor
-              content_size: 1351079888211148
-              origin_rev_id: 1351079888211148
-              slot_role: dolor
       editor:
         title: development/fragment/mediawiki/state/entity/user
         description: Represents the MediaWiki user that made this edit.
@@ -672,8 +505,8 @@ properties:
             user_text: dolor
       is_comment_visible:
         description: >
-          Whether the comment of the revision is visible. Affects comment and
-          comment_html fields. See RevisionRecord->DELETED_COMMENT.
+          Whether the comment of the revision is visible. See
+          RevisionRecord->DELETED_COMMENT.
         type: boolean
       is_content_visible:
         description: >
@@ -746,44 +579,81 @@ properties:
     type: string
     minLength: 1
 examples:
-  - $schema: /development/mediawiki/page/change/1.1.0
-    changelog_kind: update
-    comment: changed a thing
-    dt: '2021-01-01T00:00:00.0Z'
-    meta:
-      domain: examplewiki
-      dt: '2021-01-01T00:00:00.0Z'
-      stream: mediawiki.page_change
+  - changelog_kind: insert
+    comment: dolor
+    created_redirect_page:
+      is_redirect: false
+      namespace_id: 1351079888211148
+      page_id: 1351079888211148
+      page_title: dolor
+      revision_count: 1351079888211148
     page:
       is_redirect: false
-      namespace_id: 1
-      page_id: 1
-      page_title: example
-      revision_count: 1
-    page_change_kind: edit
+      namespace_id: 1351079888211148
+      page_id: 1351079888211148
+      page_title: dolor
+      revision_count: 1351079888211148
+    page_change_kind: create
     performer:
-      user_id: 123
-      user_text: yoohoo
+      edit_count: 1351079888211148
+      groups:
+        - dolor
+      is_bot: false
+      is_registered: false
+      is_system: false
+      is_temp: false
+      registration_dt: '2021-01-01T00:00:00.0Z'
+      user_id: 1351079888211148
+      user_text: dolor
+    prior_state:
+      page:
+        is_redirect: false
+        namespace_id: 1351079888211148
+        page_id: 1351079888211148
+        page_title: dolor
+        revision_count: 1351079888211148
+      revision:
+        comment: dolor
+        editor:
+          edit_count: 1351079888211148
+          groups:
+            - dolor
+          is_bot: false
+          is_registered: false
+          is_system: false
+          is_temp: false
+          registration_dt: '2021-01-01T00:00:00.0Z'
+          user_id: 1351079888211148
+          user_text: dolor
+        is_comment_visible: false
+        is_content_visible: false
+        is_editor_visible: false
+        is_minor_edit: false
+        rev_dt: '2021-01-01T00:00:00.0Z'
+        rev_id: 1351079888211149
+        rev_parent_id: 1351079888211148
+        rev_sha1: dolor
+        rev_size: 1351079888211148
     revision:
-      comment: changed a thing
-      content_slots:
-        main:
-          content_format: text/x-wiki
-          content_model: wikitext
-          content_sha1: 16619839a55cfb5c61bcf520bf9734e0c67f98cc
-          content_size: 100
-          origin_rev_id: 2
-          slot_role: main
+      comment: dolor
       editor:
-        user_id: 123
-        user_text: example
-      is_comment_visible: true
-      is_content_visible: true
-      is_editor_visible: true
+        edit_count: 1351079888211148
+        groups:
+          - dolor
+        is_bot: false
+        is_registered: false
+        is_system: false
+        is_temp: false
+        registration_dt: '2021-01-01T00:00:00.0Z'
+        user_id: 1351079888211148
+        user_text: dolor
+      is_comment_visible: false
+      is_content_visible: false
+      is_editor_visible: false
       is_minor_edit: false
       rev_dt: '2021-01-01T00:00:00.0Z'
-      rev_id: 2
-      rev_parent_id: 1
-      rev_sha1: 16619839a55cfb5c61bcf520bf9734e0c67f98cc
-      rev_size: 100
-    wiki_id: example
+      rev_id: 1351079888211149
+      rev_parent_id: 1351079888211148
+      rev_sha1: dolor
+      rev_size: 1351079888211148
+    wiki_id: dolor

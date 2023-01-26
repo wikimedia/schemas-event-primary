@@ -10,7 +10,7 @@ description: >
   add those fields to concrete schema yourself.
   See the non-fragment mediawiki/page/change schema for working example.
 
-$id: /development/fragment/mediawiki/state/change/page/1.0.0
+$id: /development/fragment/mediawiki/state/change/page/2.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
@@ -71,15 +71,6 @@ properties:
       Same as revision.comment on edits.
     type: string
 
-  # TODO: perhaps comment_formatted is a better name?
-  # This is set by Linker::formatComment, which escapes
-  # user provided html, but leaves some other (MW set) html formatting.
-  comment_html:
-    description: >
-      The comment left by the user that performed this change parsed into simple
-      HTML. Same as revision.comment_html on edits. Optional.
-    type: string
-
   page:
     # The entity/page schema.
     $ref: /development/fragment/mediawiki/state/entity/page/1.0.0
@@ -90,7 +81,7 @@ properties:
 
   revision:
     # The entity/revision schema
-    $ref: /development/fragment/mediawiki/state/entity/revision/1.0.0
+    $ref: /development/fragment/mediawiki/state/entity/revision/2.0.0
     # Revision entity rev_id and rev_dt are required.
     required:
       - rev_id
@@ -121,4 +112,4 @@ properties:
         # to avoid adding required fields here.  You need to update
         # this version if upgrading the entity/revision schema version.
       revision:
-        $ref: /development/fragment/mediawiki/state/entity/revision/1.0.0
+        $ref: /development/fragment/mediawiki/state/entity/revision/2.0.0

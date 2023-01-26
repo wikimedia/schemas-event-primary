@@ -2,13 +2,13 @@
 # as we iterate on its design.
 title: development/mediawiki/page/change
 description: Represents a MediaWiki page state change in a changelog
-$id: /development/mediawiki/page/change/1.1.0
+$id: /development/mediawiki/page/change/2.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
 allOf:
   - $ref: /fragment/common/2.0.0#
-  - $ref: /development/fragment/mediawiki/state/change/page/1.0.0
+  - $ref: /development/fragment/mediawiki/state/change/page/2.0.0
 
 properties:
   revision:
@@ -36,6 +36,7 @@ examples:
     changelog_kind: update
     page_change_kind: edit
     wiki_id: example
+    comment: changed a thing
     page:
       is_redirect: false
       namespace_id: 1
@@ -51,6 +52,7 @@ examples:
       rev_parent_id: 1
       rev_sha1: 16619839a55cfb5c61bcf520bf9734e0c67f98cc
       rev_size: 100
+      comment: changed a thing
       editor:
         user_id: 123
         user_text: example

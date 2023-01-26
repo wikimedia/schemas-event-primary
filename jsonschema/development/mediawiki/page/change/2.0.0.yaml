@@ -1,6 +1,6 @@
 title: development/mediawiki/page/change
 description: Represents a MediaWiki page state change in a changelog
-$id: /development/mediawiki/page/change/1.1.0
+$id: /development/mediawiki/page/change/2.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
@@ -448,8 +448,8 @@ properties:
                 user_text: dolor
           is_comment_visible:
             description: >
-              Whether the comment of the revision is visible. Affects comment
-              and comment_html fields. See RevisionRecord->DELETED_COMMENT.
+              Whether the comment of the revision is visible. See
+              RevisionRecord->DELETED_COMMENT.
             type: boolean
           is_content_visible:
             description: >
@@ -672,8 +672,8 @@ properties:
             user_text: dolor
       is_comment_visible:
         description: >
-          Whether the comment of the revision is visible. Affects comment and
-          comment_html fields. See RevisionRecord->DELETED_COMMENT.
+          Whether the comment of the revision is visible. See
+          RevisionRecord->DELETED_COMMENT.
         type: boolean
       is_content_visible:
         description: >
@@ -746,7 +746,7 @@ properties:
     type: string
     minLength: 1
 examples:
-  - $schema: /development/mediawiki/page/change/1.1.0
+  - $schema: /development/mediawiki/page/change/2.0.0
     changelog_kind: update
     comment: changed a thing
     dt: '2021-01-01T00:00:00.0Z'
