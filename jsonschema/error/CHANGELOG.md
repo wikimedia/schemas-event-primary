@@ -1,3 +1,11 @@
+# 2.0.0
+Technically 'backwards imcompatible', but existent
+downstream systems should not care.
+We are adding a new field, and removing requiredness.
+
+- Use fragment/common/2.0.0 to get dt field.
+- raw_event should not be required
+
 # 1.0.0
 - Add errored_schema_uri and errored_stream_name
 
