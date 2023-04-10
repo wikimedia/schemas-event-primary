@@ -1,0 +1,236 @@
+title: development/network/probe
+description: >
+  This schema describes the format of the report sent from the browser after
+  calculating various  network parameters. The library used to calculate these
+  parameters works similar to Probnik and  borrows many terms from it. The
+  library takes a json recipe as input which contains names and  http endpoints
+  of various datacenters. The library then makes some requests to each of the 
+  datacenter and records various timings involved in making the requests. This
+  data is then combined  to compile a report and sent to EventGate. The data can
+  then be used to rank the datacenters based  on the performance for a
+  particular user/IP and also update the GeoIP mappings if needed. See
+  https://phabricator.wikimedia.org/T332024
+$id: /development/network/probe/1.0.0
+$schema: 'https://json-schema.org/draft-07/schema#'
+type: object
+additionalProperties: false
+required:
+  - $schema
+  - meta
+properties:
+  $schema:
+    description: >
+      A URI identifying the JSONSchema for this event. This should match an
+      schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
+  http:
+    type: object
+    properties:
+      client_ip:
+        description: >-
+          The http client's IP address, usually set from the X-Client-IP header,
+          the value of which is extracted from X-Forwarded-For.
+        type: string
+      has_cookies:
+        description: True if the http request has any cookies set
+        type: boolean
+      method:
+        description: 'The HTTP request method (GET, POST, etc.)'
+        type: string
+      protocol:
+        description: The protocol used for the request (HTTP or HTTPS)
+        type: string
+      request_headers:
+        description: 'Request headers sent by the client.  E.g. user-agent, etc.'
+        type: object
+        additionalProperties:
+          type: string
+      response_headers:
+        description: Response headers sent back to the client (when known).
+        type: object
+        additionalProperties:
+          type: string
+      status_code:
+        description: The HTTP status code returned for this request (when known)
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
+  meta:
+    type: object
+    required:
+      - dt
+      - stream
+    properties:
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      dt:
+        description: 'UTC event datetime, in ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      id:
+        description: Unique ID of this event
+        type: string
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      stream:
+        description: Name of the stream/queue/dataset that this event belongs in
+        type: string
+        minLength: 1
+      uri:
+        description: Unique URI identifying the event or entity
+        type: string
+        format: uri-reference
+        maxLength: 8192
+  recipe_name:
+    description: Name of the recipe
+    type: string
+  recipe_type:
+    description: Type of the recipe. Example http_get
+    type: string
+  reports:
+    description: >-
+      The list containing reports of all targets. A report may contain data of
+      multiple pulses.
+    type: array
+    items:
+      description: The report of a particular target/datacenter
+      type: object
+      properties:
+        pulses:
+          description: >-
+            The list containing details of all pulses. A pulse represents a
+            single request to the target_url.
+          type: array
+          items:
+            description: The detail of a particular pulse
+            type: object
+            properties:
+              actual_bytes:
+                description: Actual data size in bytes (decodedBodySize)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              dns_time_ms:
+                description: >-
+                  DNS resolution time in ms (domainLookupEnd -
+                  domainLookupStart)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              duration_ms:
+                description: Duration of the request in ms (duration)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              redirect_time_ms:
+                description: Redirection time in ms (redirectStart - redirectEnd)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              request_time_ms:
+                description: Request time in ms (responseStart - requestStart)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              response_time_ms:
+                description: Response time in ms (responseEnd - responseStart)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              status_code:
+                description: Status of the request (responseStatus)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              tcp_time_ms:
+                description: >-
+                  TCP connection time in ms (secureConnectionStart -
+                  connectStart)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              tls_time_ms:
+                description: TLS handshake time in ms (connectEnd - secureConnectionStart)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              transfer_bytes:
+                description: Transfer data size in bytes (encodedBodySize)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+              ttfb_time_ms:
+                description: Time to first byte in ms (responseStart - startTime)
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+        target_name:
+          description: 'Name of the target. Example eqiad, eqsin, etc'
+          type: string
+        target_url:
+          description: >-
+            URL of the target. Example
+            https://measure-eqiad.wikimedia.org/measure
+          type: string
+examples:
+  - $schema: /development/network/probe/1.0.0
+    meta:
+      dt: '2023-04-10T00:00:00Z'
+      stream: development.network.probe
+    recipe_name: Latency Test
+    recipe_type: http_get
+    reports:
+      - pulses:
+          - actual_bytes: 0
+            dns_time_ms: 9
+            duration_ms: 934
+            redirect_time_ms: 0
+            request_time_ms: 302
+            response_time_ms: 2
+            status_code: 200
+            tcp_time_ms: 2
+            tls_time_ms: 618
+            transfer_bytes: 0
+            ttfb_ms: 933
+          - actual_bytes: 0
+            dns_time_ms: 0
+            duration_ms: 305
+            redirect_time_ms: 0
+            request_time_ms: 301
+            response_time_ms: 2
+            status_code: 200
+            tcp_time_ms: 0
+            tls_time_ms: 0
+            transfer_bytes: 0
+            ttfb_ms: 304
+        target_name: eqiad
+        target_url: 'https://measure-eqiad.wikimedia.org/measure'
+      - pulses:
+          - actual_bytes: 0
+            dns_time_ms: 3
+            duration_ms: 303
+            redirect_time_ms: 0
+            request_time_ms: 92
+            response_time_ms: 1
+            status_code: 200
+            tcp_time_ms: 3
+            tls_time_ms: 200
+            transfer_bytes: 0
+            ttfb_ms: 302
+          - actual_bytes: 0
+            dns_time_ms: 0
+            duration_ms: 108
+            redirect_time_ms: 0
+            request_time_ms: 103
+            response_time_ms: 2
+            status_code: 200
+            tcp_time_ms: 0
+            tls_time_ms: 0
+            transfer_bytes: 0
+            ttfb_ms: 106
+        target_name: eqsin
+        target_url: 'https://measure-eqsin.wikimedia.org/measure'
