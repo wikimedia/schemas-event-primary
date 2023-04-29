@@ -17,7 +17,7 @@ $schema: https://json-schema.org/draft-07/schema#
 type: object
 additionalProperties: false
 allOf:
-  - $ref: /fragment/common/1.0.0#
+  - $ref: /fragment/common/2.0.0#
   - $ref: /fragment/http/1.2.0#
   - $ref: /fragment/http/client_ip/1.0.0#
 properties:
@@ -27,6 +27,9 @@ properties:
   recipe_type:
     type: string
     description: Type of the recipe. Example http_get
+  ctx:
+    type: object
+    description: Context passed by the recipe. This is same as 'ctx' field in the recipe.
   reports:
     type: array
     description: The list containing reports of all targets. A report may contain data of multiple pulses.
@@ -82,4 +85,4 @@ properties:
                 description: Actual data size in bytes (decodedBodySize)
 
 examples:
-  - {"$schema": {"$ref": "#/$id"}, "meta": {"stream": "development.network.probe", "dt": "2023-04-10T00:00:00Z"}, "recipe_name": "Latency Test", "recipe_type": "http_get", "reports": [{"target_name": "eqiad", "target_url": "https://measure-eqiad.wikimedia.org/measure", "pulses": [{"redirect_time_ms": 0, "dns_time_ms": 9, "tcp_time_ms": 2, "tls_time_ms": 618, "request_time_ms": 302, "response_time_ms": 2, "ttfb_ms": 933, "duration_ms": 934, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0}, {"redirect_time_ms": 0, "dns_time_ms": 0, "tcp_time_ms": 0, "tls_time_ms": 0, "request_time_ms": 301, "response_time_ms": 2, "ttfb_ms": 304, "duration_ms": 305, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0}]}, {"target_name": "eqsin", "target_url": "https://measure-eqsin.wikimedia.org/measure", "pulses": [{"redirect_time_ms": 0, "dns_time_ms": 3, "tcp_time_ms": 3, "tls_time_ms": 200, "request_time_ms": 92, "response_time_ms": 1, "ttfb_ms": 302, "duration_ms": 303, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0}, {"redirect_time_ms": 0, "dns_time_ms": 0, "tcp_time_ms": 0, "tls_time_ms": 0, "request_time_ms": 103, "response_time_ms": 2, "ttfb_ms": 106, "duration_ms": 108, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0}]}]}
+  - { "recipe_name": "Latency Test", "recipe_type": "http_get", "ctx": { "server": "test", "ts": 1682742173938 }, "reports": [ { "target_name": "eqiad", "target_url": "https://measure-eqiad.wikimedia.org/measure", "pulses": [ { "redirect_time_ms": 0, "dns_time_ms": 14, "tcp_time_ms": 326, "tls_time_ms": 362, "request_time_ms": 399, "response_time_ms": 1, "ttfb_ms": 1102, "duration_ms": 1102, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0 }, { "redirect_time_ms": 0, "dns_time_ms": 0, "tcp_time_ms": 0, "tls_time_ms": 0, "request_time_ms": 339, "response_time_ms": 1, "ttfb_ms": 341, "duration_ms": 341, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0 } ] }, { "target_name": "eqsin", "target_url": "https://measure-eqsin.wikimedia.org/measure", "pulses": [ { "redirect_time_ms": 0, "dns_time_ms": 17, "tcp_time_ms": 145, "tls_time_ms": 150, "request_time_ms": 164, "response_time_ms": 1, "ttfb_ms": 476, "duration_ms": 477, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0 }, { "redirect_time_ms": 0, "dns_time_ms": 0, "tcp_time_ms": 0, "tls_time_ms": 0, "request_time_ms": 150, "response_time_ms": 1, "ttfb_ms": 152, "duration_ms": 153, "status_code": 200, "transfer_bytes": 0, "actual_bytes": 0 } ] } ], "$schema": "/development/network/probe/1.0.0", "dt": "2023-04-29T04:22:57.466Z", "meta": { "stream": "development.network.probe", "domain": "localhost", "id": "3e0bd919-d12f-47e1-916f-3841115beb90", "dt": "2023-04-29T04:22:58.552Z", "request_id": "857a7380-e645-11ed-8647-7df7a5373a09" }, "http": { "request_headers": { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" }, "client_ip": "172.19.0.1" } }

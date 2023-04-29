@@ -17,12 +17,24 @@ additionalProperties: false
 required:
   - $schema
   - meta
+  - dt
 properties:
   $schema:
     description: >
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
     type: string
+  ctx:
+    description: Context passed by the recipe. This is same as 'ctx' field in the recipe.
+    type: object
+  dt:
+    description: >
+      ISO-8601 formatted timestamp of when the event occurred/was generated in
+      UTC), AKA 'event time'. This is different than meta.dt, which is used as
+      the time the system received this event.
+    type: string
+    format: date-time
+    maxLength: 128
   http:
     type: object
     properties:
@@ -58,7 +70,6 @@ properties:
   meta:
     type: object
     required:
-      - dt
       - stream
     properties:
       domain:
@@ -66,7 +77,7 @@ properties:
         type: string
         minLength: 1
       dt:
-        description: 'UTC event datetime, in ISO-8601 format'
+        description: 'Time the event was received by the system, in UTC ISO-8601 format'
         type: string
         format: date-time
         maxLength: 128
@@ -77,7 +88,7 @@ properties:
         description: Unique ID of the request that caused the event
         type: string
       stream:
-        description: Name of the stream/queue/dataset that this event belongs in
+        description: Name of the stream (dataset) that this event belongs in
         type: string
         minLength: 1
       uri:
@@ -178,59 +189,72 @@ properties:
           type: string
 examples:
   - $schema: /development/network/probe/1.0.0
+    ctx:
+      server: test
+      ts: 1682742173938
+    dt: '2023-04-29T04:22:57.466Z'
+    http:
+      client_ip: 172.19.0.1
+      request_headers:
+        user-agent: >-
+          Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+          (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
     meta:
-      dt: '2023-04-10T00:00:00Z'
+      domain: localhost
+      dt: '2023-04-29T04:22:58.552Z'
+      id: 3e0bd919-d12f-47e1-916f-3841115beb90
+      request_id: 857a7380-e645-11ed-8647-7df7a5373a09
       stream: development.network.probe
     recipe_name: Latency Test
     recipe_type: http_get
     reports:
       - pulses:
           - actual_bytes: 0
-            dns_time_ms: 9
-            duration_ms: 934
+            dns_time_ms: 14
+            duration_ms: 1102
             redirect_time_ms: 0
-            request_time_ms: 302
-            response_time_ms: 2
+            request_time_ms: 399
+            response_time_ms: 1
             status_code: 200
-            tcp_time_ms: 2
-            tls_time_ms: 618
+            tcp_time_ms: 326
+            tls_time_ms: 362
             transfer_bytes: 0
-            ttfb_ms: 933
+            ttfb_ms: 1102
           - actual_bytes: 0
             dns_time_ms: 0
-            duration_ms: 305
+            duration_ms: 341
             redirect_time_ms: 0
-            request_time_ms: 301
-            response_time_ms: 2
+            request_time_ms: 339
+            response_time_ms: 1
             status_code: 200
             tcp_time_ms: 0
             tls_time_ms: 0
             transfer_bytes: 0
-            ttfb_ms: 304
+            ttfb_ms: 341
         target_name: eqiad
         target_url: 'https://measure-eqiad.wikimedia.org/measure'
       - pulses:
           - actual_bytes: 0
-            dns_time_ms: 3
-            duration_ms: 303
+            dns_time_ms: 17
+            duration_ms: 477
             redirect_time_ms: 0
-            request_time_ms: 92
+            request_time_ms: 164
             response_time_ms: 1
             status_code: 200
-            tcp_time_ms: 3
-            tls_time_ms: 200
+            tcp_time_ms: 145
+            tls_time_ms: 150
             transfer_bytes: 0
-            ttfb_ms: 302
+            ttfb_ms: 476
           - actual_bytes: 0
             dns_time_ms: 0
-            duration_ms: 108
+            duration_ms: 153
             redirect_time_ms: 0
-            request_time_ms: 103
-            response_time_ms: 2
+            request_time_ms: 150
+            response_time_ms: 1
             status_code: 200
             tcp_time_ms: 0
             tls_time_ms: 0
             transfer_bytes: 0
-            ttfb_ms: 106
+            ttfb_ms: 152
         target_name: eqsin
         target_url: 'https://measure-eqsin.wikimedia.org/measure'
