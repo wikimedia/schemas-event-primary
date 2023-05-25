@@ -205,11 +205,6 @@ properties:
           This is checked via the $user->isBot() method, which considers both
           user_groups and user permissions.
         type: boolean
-      is_registered:
-        description: >
-          True if this user is registered and has a record in the MediaWiki user
-          table.
-        type: boolean
       is_system:
         description: >
           True if the user is a MediaWiki 'system' user. These are users that
@@ -245,7 +240,6 @@ properties:
         groups:
           - dolor
         is_bot: false
-        is_registered: false
         is_system: false
         is_temp: false
         registration_dt: '2021-01-01T00:00:00.0Z'
@@ -402,11 +396,6 @@ properties:
                   this event. This is checked via the $user->isBot() method,
                   which considers both user_groups and user permissions.
                 type: boolean
-              is_registered:
-                description: >
-                  True if this user is registered and has a record in the
-                  MediaWiki user table.
-                type: boolean
               is_system:
                 description: >
                   True if the user is a MediaWiki 'system' user. These are users
@@ -443,7 +432,6 @@ properties:
                 groups:
                   - dolor
                 is_bot: false
-                is_registered: false
                 is_system: false
                 is_temp: false
                 registration_dt: '2021-01-01T00:00:00.0Z'
@@ -503,7 +491,6 @@ properties:
               groups:
                 - dolor
               is_bot: false
-              is_registered: false
               is_system: false
               is_temp: false
               registration_dt: '2021-01-01T00:00:00.0Z'
@@ -626,11 +613,6 @@ properties:
               event. This is checked via the $user->isBot() method, which
               considers both user_groups and user permissions.
             type: boolean
-          is_registered:
-            description: >
-              True if this user is registered and has a record in the MediaWiki
-              user table.
-            type: boolean
           is_system:
             description: >
               True if the user is a MediaWiki 'system' user. These are users
@@ -667,7 +649,6 @@ properties:
             groups:
               - dolor
             is_bot: false
-            is_registered: false
             is_system: false
             is_temp: false
             registration_dt: '2021-01-01T00:00:00.0Z'
@@ -727,7 +708,6 @@ properties:
           groups:
             - dolor
           is_bot: false
-          is_registered: false
           is_system: false
           is_temp: false
           registration_dt: '2021-01-01T00:00:00.0Z'

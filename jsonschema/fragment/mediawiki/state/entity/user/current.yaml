@@ -41,11 +41,6 @@ properties:
       user_groups and user permissions.
     type: boolean
 
-  is_registered:
-    description: >
-      True if this user is registered and has a record in the MediaWiki user table.
-    type: boolean
-
   is_system:
     description: >
       True if the user is a MediaWiki 'system' user. These are users that
