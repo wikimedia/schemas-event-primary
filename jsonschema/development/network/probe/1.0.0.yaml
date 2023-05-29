@@ -137,6 +137,14 @@ properties:
                 type: number
                 maximum: 9007199254740991
                 minimum: -9007199254740991
+              pulse_identifier:
+                description: Alphanumeric string used to uniquely identify each pulse
+                type: string
+              pulse_number:
+                description: Pulse number
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
               redirect_time_ms:
                 description: Redirection time in ms (redirectStart - redirectEnd)
                 type: number
@@ -212,6 +220,8 @@ examples:
           - actual_bytes: 0
             dns_time_ms: 14
             duration_ms: 1102
+            pulse_identifier: 5ma1j0p36irtiqaa6m3a5am3
+            pulse_number: 0
             redirect_time_ms: 0
             request_time_ms: 399
             response_time_ms: 1
@@ -223,6 +233,8 @@ examples:
           - actual_bytes: 0
             dns_time_ms: 0
             duration_ms: 341
+            pulse_identifier: bb4oat8n47h3w9ww013vrefp
+            pulse_number: 1
             redirect_time_ms: 0
             request_time_ms: 339
             response_time_ms: 1
@@ -237,6 +249,8 @@ examples:
           - actual_bytes: 0
             dns_time_ms: 17
             duration_ms: 477
+            pulse_identifier: igaisoi8vtiozrxjodyquwkh
+            pulse_number: 0
             redirect_time_ms: 0
             request_time_ms: 164
             response_time_ms: 1
@@ -248,6 +262,8 @@ examples:
           - actual_bytes: 0
             dns_time_ms: 0
             duration_ms: 153
+            pulse_identifier: vkmpozj04xlbhht3xl1m29r0
+            pulse_number: 1
             redirect_time_ms: 0
             request_time_ms: 150
             response_time_ms: 1
