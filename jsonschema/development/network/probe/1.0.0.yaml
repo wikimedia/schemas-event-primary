@@ -27,6 +27,8 @@ properties:
   ctx:
     description: Context passed by the recipe. This is same as 'ctx' field in the recipe.
     type: object
+    additionalProperties:
+      type: string
   dt:
     description: >
       ISO-8601 formatted timestamp of when the event occurred/was generated in
@@ -199,7 +201,7 @@ examples:
   - $schema: /development/network/probe/1.0.0
     ctx:
       server: test
-      ts: 1682742173938
+      ts: '1682742173938'
     dt: '2023-04-29T04:22:57.466Z'
     http:
       client_ip: 172.19.0.1
