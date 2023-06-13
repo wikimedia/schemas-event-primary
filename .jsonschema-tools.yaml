@@ -7,6 +7,16 @@ logLevel: info
 shouldGenerateExample: true
 skipSchemaTestCases:
   # /mediawiki/recentchange legacy schema has polymorphic
-  # nullable types, skip the monomorphic types test case.
+  # nullable types, skip the deterministic types test case.
   '/mediawiki/recentchange/.*':
-    - schema-monomorphic-types
+    - schema-deterministic-types
+  # These legacy schemas have object types without a defined schema,
+  # so skip the deterministic types test case.
+  'change-prop/continue/.*':
+    - schema-deterministic-types
+  'change-prop/retry/.*':
+    - schema-deterministic-types
+  'mediawiki/job/.*':
+    - schema-deterministic-types
+  'mediawiki/page/properties-change/.*':
+    - schema-deterministic-types
