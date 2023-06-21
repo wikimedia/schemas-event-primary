@@ -1,3 +1,7 @@
+# 2.1.0
+
+Add error_type.
+
 # 2.0.0
 Technically 'backwards imcompatible', but existent
 downstream systems should not care.
