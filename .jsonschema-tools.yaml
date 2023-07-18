@@ -20,3 +20,10 @@ skipSchemaTestCases:
     - schema-deterministic-types
   'mediawiki/page/properties-change/.*':
     - schema-deterministic-types
+  # As of jsonschema-tools 1.1.0, removing fields between
+  # minor versions fails validation.
+  # 'client_ip' was removed between minor versions.
+  'fragment/http/1.2.0':
+    - schema-version-compatibility
+  'mediawiki/client/error/1.1.0':
+    - schema-version-compatibility
