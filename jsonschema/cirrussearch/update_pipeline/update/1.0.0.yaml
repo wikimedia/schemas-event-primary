@@ -1,0 +1,460 @@
+title: cirrussearch/update_pipeline/update
+description: Internal event for page updates handled by CirrusSearch
+$id: /cirrussearch/update_pipeline/update/1.0.0
+$schema: 'https://json-schema.org/draft-07/schema#'
+type: object
+additionalProperties: false
+required:
+  - $schema
+  - cirrussearch_cluster_group
+  - cirrussearch_index_name
+  - dt
+  - meta
+  - namespace_id
+  - operation
+  - page_id
+properties:
+  $schema:
+    description: >
+      A URI identifying the JSONSchema for this event. This should match an
+      schema's $id in a schema repository. E.g. /schema/title/1.0.0
+    type: string
+  cirrussearch_cluster_group:
+    description: The elastic search cluster group
+    type: string
+    minLength: 1
+  cirrussearch_index_name:
+    description: The elastic search index name
+    type: string
+    minLength: 1
+  cirrussearch_noop_fields:
+    description: >-
+      Overrides of the fields object for the elastic search super-detect-noop
+      plugin.
+    type: object
+    additionalProperties: false
+    properties:
+      redirect:
+        type: object
+        additionalProperties: false
+        properties:
+          add:
+            type: array
+            items:
+              type: object
+              required:
+                - namespace
+                - title
+              properties:
+                title:
+                  type: string
+                namespace:
+                  type: integer
+                  maximum: 9007199254740991
+                  minimum: 0
+          max_size:
+            type: integer
+            maximum: 9007199254740991
+            minimum: 1
+          remove:
+            type: array
+            items:
+              type: object
+              required:
+                - namespace
+                - title
+              properties:
+                title:
+                  type: string
+                namespace:
+                  type: integer
+                  maximum: 9007199254740991
+                  minimum: 0
+  cirrussearch_noop_hints:
+    description: Handlers for the elastic search super-detect-noop plugin.
+    type: object
+    additionalProperties:
+      type: string
+  domain:
+    description: Domain of the wiki project
+    type: string
+    minLength: 1
+  dt:
+    description: >
+      ISO-8601 formatted timestamp of when the event occurred/was generated in
+      UTC), AKA 'event time'. This is different than meta.dt, which is used as
+      the time the system received this event.
+    type: string
+    format: date-time
+    maxLength: 128
+  fields:
+    description: >-
+      Intermediate document from cirrus search for elastic search, see
+      https://www.mediawiki.org/wiki/Extension:CirrusSearch/Schema
+    type: object
+    required:
+      - page_id
+      - version
+    properties:
+      title:
+        type: string
+      auxiliary_text:
+        type: array
+        items:
+          type: string
+      category:
+        type: array
+        items:
+          type: string
+      content_model:
+        type: string
+      coordinates:
+        type: array
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+            coord:
+              type: object
+              additionalProperties:
+                type: number
+                maximum: 9007199254740991
+                minimum: -9007199254740991
+            country:
+              type: string
+            dim:
+              type: integer
+              maximum: 9007199254740991
+              minimum: 0
+            globe:
+              type: string
+            name:
+              type: string
+            primary:
+              type: boolean
+            region:
+              type: string
+      create_timestamp:
+        description: UTC event datetime in ISO-8601 format
+        type: string
+        format: date-time
+        maxLength: 128
+      defaultsort:
+        type: string
+      descriptions:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+      display_title:
+        type: string
+      external_link:
+        type: array
+        items:
+          type: string
+      extra_source:
+        type: string
+      file_bits:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_height:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_media_type:
+        type: string
+      file_mime:
+        type: string
+      file_resolution:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_size:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      file_text:
+        type: string
+      file_width:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      heading:
+        type: array
+        items:
+          type: string
+      incoming_links:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      labels:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+      language:
+        type: string
+      local_sites_with_dupe:
+        type: array
+        items:
+          type: string
+      namespace:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      namespace_text:
+        type: string
+      opening_text:
+        type: string
+      outgoing_link:
+        type: array
+        items:
+          type: string
+      page_id:
+        description: The page ID of the page this revision belongs to.
+        type: integer
+        maximum: 9007199254740991
+        minimum: 1
+      popularity_score:
+        type: number
+        maximum: 9007199254740991
+        minimum: -9007199254740991
+      redirect:
+        type: array
+        items:
+          type: object
+          required:
+            - namespace
+            - title
+          properties:
+            title:
+              type: string
+            namespace:
+              type: integer
+              maximum: 9007199254740991
+              minimum: 0
+      snapshot:
+        type: string
+      source_text:
+        type: string
+      statement_keywords:
+        type: array
+        items:
+          type: string
+      template:
+        type: array
+        items:
+          type: string
+      text:
+        type: string
+      text_bytes:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      timestamp:
+        description: UTC event datetime in ISO-8601 format
+        type: string
+        format: date-time
+        maxLength: 128
+      version:
+        description: The (database) revision ID.
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+      weighted_tags:
+        type: array
+        items:
+          type: string
+      wiki:
+        type: string
+      wikibase_item:
+        type: string
+  meta:
+    type: object
+    required:
+      - stream
+    properties:
+      domain:
+        description: Domain the event or entity pertains to
+        type: string
+        minLength: 1
+      dt:
+        description: 'Time the event was received by the system, in UTC ISO-8601 format'
+        type: string
+        format: date-time
+        maxLength: 128
+      id:
+        description: Unique ID of this event
+        type: string
+      request_id:
+        description: Unique ID of the request that caused the event
+        type: string
+      stream:
+        description: Name of the stream (dataset) that this event belongs in
+        type: string
+        minLength: 1
+      uri:
+        description: Unique URI identifying the event or entity
+        type: string
+        format: uri-reference
+        maxLength: 8192
+  namespace_id:
+    description: The id of the namespace this page belongs to.
+    type: integer
+    maximum: 9007199254740991
+    minimum: 0
+  operation:
+    type: string
+    enum:
+      - delete
+      - page_refresh
+      - update_existing
+      - update_revision
+  page_id:
+    description: The (database) page ID of the page.
+    type: integer
+    maximum: 9007199254740991
+    minimum: 0
+  page_title:
+    description: The normalized title of the page.
+    type: string
+    minLength: 1
+  rev_id:
+    description: The (database) revision ID.
+    type: integer
+    maximum: 9007199254740991
+    minimum: 1
+  wiki_id:
+    description: >
+      The wiki ID, which is usually the same as the MediaWiki database name.
+      E.g. enwiki, metawiki, etc.
+    type: string
+    minLength: 1
+examples:
+  - $schema: /cirrussearch/update_pipeline/update/1.0.0
+    cirrussearch_cluster_group: dolor
+    cirrussearch_index_name: dolor
+    cirrussearch_noop_fields:
+      redirect:
+        add:
+          - title: dolor
+            namespace: 1351079888211148
+        max_size: 1351079888211149
+        remove:
+          - title: dolor
+            namespace: 1351079888211148
+    cirrussearch_noop_hints:
+      dolorb: dolor
+    domain: dolor
+    dt: '2021-01-01T00:00:00.0Z'
+    fields:
+      title: dolor
+      auxiliary_text:
+        - dolor
+      category:
+        - dolor
+      content_model: dolor
+      coordinates:
+        - type: dolor
+          coord:
+            dolorb: -6305039478318694
+          country: dolor
+          dim: 1351079888211148
+          globe: dolor
+          name: dolor
+          primary: false
+          region: dolor
+      create_timestamp: '2021-01-01T00:00:00.0Z'
+      defaultsort: dolor
+      descriptions:
+        dolorb:
+          - dolor
+      display_title: dolor
+      external_link:
+        - dolor
+      extra_source: dolor
+      file_bits: 1351079888211148
+      file_height: 1351079888211148
+      file_media_type: dolor
+      file_mime: dolor
+      file_resolution: 1351079888211148
+      file_size: 1351079888211148
+      file_text: dolor
+      file_width: 1351079888211148
+      heading:
+        - dolor
+      incoming_links: 1351079888211148
+      labels:
+        dolorb:
+          - dolor
+      language: dolor
+      local_sites_with_dupe:
+        - dolor
+      namespace: 1351079888211148
+      namespace_text: dolor
+      opening_text: dolor
+      outgoing_link:
+        - dolor
+      page_id: 1351079888211149
+      popularity_score: -6305039478318694
+      redirect:
+        - title: dolor
+          namespace: 1351079888211148
+      snapshot: dolor
+      source_text: dolor
+      statement_keywords:
+        - dolor
+      template:
+        - dolor
+      text: dolor
+      text_bytes: 1351079888211148
+      timestamp: '2021-01-01T00:00:00.0Z'
+      version: 1351079888211148
+      weighted_tags:
+        - dolor
+      wiki: dolor
+      wikibase_item: dolor
+    meta:
+      domain: dolor
+      dt: '2021-01-01T00:00:00.0Z'
+      id: dolor
+      request_id: dolor
+      stream: dolor
+      uri: 'http://example.org'
+    namespace_id: 1351079888211148
+    operation: delete
+    page_id: 1351079888211148
+    page_title: dolor
+    rev_id: 1351079888211149
+    wiki_id: dolor
+definitions:
+  redirect:
+    type: object
+    required:
+      - namespace
+      - title
+    properties:
+      title:
+        type: string
+      namespace:
+        type: integer
+        maximum: 9007199254740991
+        minimum: 0
+  redirect_array:
+    type: array
+    items:
+      type: object
+      required:
+        - namespace
+        - title
+      properties:
+        title:
+          type: string
+        namespace:
+          type: integer
+          maximum: 9007199254740991
+          minimum: 0
