@@ -9,7 +9,7 @@ required:
   - page_id
 allOf:
   - $ref: /fragment/common/2.0.0
-  - $ref: /cirrussearch/fragment/index/1.0.0
+  - $ref: /fragment/cirrussearch/index/1.0.0
 properties:
   operation:
     type: string
