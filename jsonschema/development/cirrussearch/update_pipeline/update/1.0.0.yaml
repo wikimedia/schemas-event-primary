@@ -1,17 +1,17 @@
-title: cirrussearch/update_pipeline/update
+title: development/cirrussearch/update_pipeline/update
 description: Internal event for page updates handled by CirrusSearch
-$id: /cirrussearch/update_pipeline/update/1.0.0
+$id: /development/cirrussearch/update_pipeline/update/1.0.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
 required:
   - $schema
+  - change_type
   - cirrussearch_cluster_group
   - cirrussearch_index_name
   - dt
   - meta
   - namespace_id
-  - operation
   - page_id
 properties:
   $schema:
@@ -19,6 +19,14 @@ properties:
       A URI identifying the JSONSchema for this event. This should match an
       schema's $id in a schema repository. E.g. /schema/title/1.0.0
     type: string
+  change_type:
+    type: string
+    enum:
+      - PAGE_DELETE
+      - PAGE_RERENDER
+      - REDIRECT_UPDATE
+      - REV_BASED_UPDATE
+      - TAGS_UPDATE
   cirrussearch_cluster_group:
     description: The elastic search cluster group
     type: string
@@ -41,14 +49,18 @@ properties:
           add:
             type: array
             items:
+              description: Redirect modeled for CirrusSearch index
               type: object
               required:
                 - namespace
                 - title
               properties:
                 title:
+                  description: The normalized title of the page.
                   type: string
+                  minLength: 1
                 namespace:
+                  description: The id of the namespace this page belongs to.
                   type: integer
                   maximum: 9007199254740991
                   minimum: 0
@@ -59,14 +71,18 @@ properties:
           remove:
             type: array
             items:
+              description: Redirect modeled for CirrusSearch index
               type: object
               required:
                 - namespace
                 - title
               properties:
                 title:
+                  description: The normalized title of the page.
                   type: string
+                  minLength: 1
                 namespace:
+                  description: The id of the namespace this page belongs to.
                   type: integer
                   maximum: 9007199254740991
                   minimum: 0
@@ -226,14 +242,18 @@ properties:
       redirect:
         type: array
         items:
+          description: Redirect modeled for CirrusSearch index
           type: object
           required:
             - namespace
             - title
           properties:
             title:
+              description: The normalized title of the page.
               type: string
+              minLength: 1
             namespace:
+              description: The id of the namespace this page belongs to.
               type: integer
               maximum: 9007199254740991
               minimum: 0
@@ -307,13 +327,6 @@ properties:
     type: integer
     maximum: 9007199254740991
     minimum: 0
-  operation:
-    type: string
-    enum:
-      - delete
-      - page_refresh
-      - update_existing
-      - update_revision
   page_id:
     description: The (database) page ID of the page.
     type: integer
@@ -335,7 +348,8 @@ properties:
     type: string
     minLength: 1
 examples:
-  - $schema: /cirrussearch/update_pipeline/update/1.0.0
+  - $schema: /development/cirrussearch/update_pipeline/update/1.0.0
+    change_type: PAGE_DELETE
     cirrussearch_cluster_group: dolor
     cirrussearch_index_name: dolor
     cirrussearch_noop_fields:
@@ -426,35 +440,42 @@ examples:
       stream: dolor
       uri: 'http://example.org'
     namespace_id: 1351079888211148
-    operation: delete
     page_id: 1351079888211148
     page_title: dolor
     rev_id: 1351079888211149
     wiki_id: dolor
 definitions:
   redirect:
+    description: Redirect modeled for CirrusSearch index
     type: object
     required:
       - namespace
       - title
     properties:
       title:
+        description: The normalized title of the page.
         type: string
+        minLength: 1
       namespace:
+        description: The id of the namespace this page belongs to.
         type: integer
         maximum: 9007199254740991
         minimum: 0
   redirect_array:
     type: array
     items:
+      description: Redirect modeled for CirrusSearch index
       type: object
       required:
         - namespace
         - title
       properties:
         title:
+          description: The normalized title of the page.
           type: string
+          minLength: 1
         namespace:
+          description: The id of the namespace this page belongs to.
           type: integer
           maximum: 9007199254740991
           minimum: 0
