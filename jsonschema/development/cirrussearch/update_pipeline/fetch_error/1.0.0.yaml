@@ -36,12 +36,9 @@ properties:
     description: identifies the entity where a fatal failure occured
     type: string
   error_type:
-    description: The name of the wiki database this event entity belongs to.
+    description: |
+      the type of the error, for example the class name of the exception.
     type: string
-    enum:
-      - NOT_FOUND
-      - NETWORK_ERROR
-      - MW_ERROR
   errored_schema_uri:
     description: >
       $schema URI of event that caused the error. This is the value of

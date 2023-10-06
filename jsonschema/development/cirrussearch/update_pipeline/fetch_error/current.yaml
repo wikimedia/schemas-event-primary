@@ -29,14 +29,6 @@ properties:
   rev_id:
     $ref: /fragment/mediawiki/state/entity/revision/1.0.0#/properties/rev_id
 
-  error_type:
-    description: The name of the wiki database this event entity belongs to.
-    type: string
-    enum:
-      - NOT_FOUND
-      - NETWORK_ERROR
-      - MW_ERROR
-
   original_event_stream:
     type: string
     description: Name of the stream (dataset) that the event causing the failure belongs in
