@@ -108,9 +108,6 @@ properties:
       Intermediate document from cirrus search for elastic search, see
       https://www.mediawiki.org/wiki/Extension:CirrusSearch/Schema
     type: object
-    required:
-      - page_id
-      - version
     properties:
       title:
         type: string
