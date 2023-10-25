@@ -63,6 +63,11 @@ properties:
             type: integer
             maximum: 9007199254740991
             minimum: 1
+  cirrussearch_fetched_at:
+    description: 'UTC event datetime in ISO-8601 format'
+    type: string
+    format: date-time
+    maxLength: 128
   fields:
     description: Intermediate document from cirrus search for elastic search, see https://www.mediawiki.org/wiki/Extension:CirrusSearch/Schema
     type: object

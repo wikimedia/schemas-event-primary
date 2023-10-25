@@ -31,6 +31,11 @@ properties:
     description: The elastic search cluster group
     type: string
     minLength: 1
+  cirrussearch_fetched_at:
+    description: UTC event datetime in ISO-8601 format
+    type: string
+    format: date-time
+    maxLength: 128
   cirrussearch_index_name:
     description: The elastic search index name
     type: string
@@ -348,6 +353,7 @@ examples:
   - $schema: /development/cirrussearch/update_pipeline/update/1.0.0
     change_type: PAGE_DELETE
     cirrussearch_cluster_group: dolor
+    cirrussearch_fetched_at: '2021-01-01T00:00:00.0Z'
     cirrussearch_index_name: dolor
     cirrussearch_noop_fields:
       redirect:
