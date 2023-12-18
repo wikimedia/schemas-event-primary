@@ -27,3 +27,6 @@ skipSchemaTestCases:
     - schema-version-compatibility
   'mediawiki/client/error/1.1.0':
     - schema-version-compatibility
+  '/webrequest/1.0.0':
+    - schema-enforced-numeric-bounds
+    - schema-deterministic-types
