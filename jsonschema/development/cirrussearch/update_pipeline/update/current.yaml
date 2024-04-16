@@ -16,6 +16,7 @@ properties:
     enum:
       - PAGE_DELETE
       - PAGE_RERENDER
+      - PAGE_RERENDER_UPSERT
       - REDIRECT_UPDATE
       - REV_BASED_UPDATE
       - TAGS_UPDATE
