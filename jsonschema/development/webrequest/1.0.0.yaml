@@ -38,6 +38,13 @@ properties:
     type: string
     format: date-time
     maxLength: 128
+  haproxy_pid:
+    description: >
+      HAProxy process id. Together with sequence, it can be used to deduplicate
+      request counts per host
+    type: number
+    maximum: 9007199254740991
+    minimum: -9007199254740991
   hostname:
     description: Source node hostname
     type: string

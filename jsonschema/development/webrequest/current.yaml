@@ -18,6 +18,13 @@ properties:
     description: Per host sequence number
     maximum: 18446744073709551615
     minimum: 0
+  
+  haproxy_pid:
+    type: number
+    description: >
+      HAProxy process id. Together with sequence, it
+      can be used to deduplicate request counts per host
+
   dt:
     type: string
     description: Timestamp at cache in ISO 8601
