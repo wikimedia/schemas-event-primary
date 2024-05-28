@@ -163,13 +163,47 @@ properties:
         type: integer
         maximum: 9007199254740991
         minimum: 0
+      label_count:
+        type: integer
       labels:
         type: object
         additionalProperties:
           type: array
           items:
             type: string
+      labels_all:
+        type: array
+        items:
+          type: string
       language:
+        type: string
+      lemma:
+        type: array
+        items:
+          type: string
+      lexeme_forms:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            representation:
+              type: array
+              items:
+                type: string
+            features:
+              type: array
+              items:
+                type: string
+      lexeme_language:
+        type: object
+        properties:
+          entity:
+            type: string
+          code:
+            type: string
+      lexical_category:
         type: string
       local_sites_with_dupe:
         type: array
@@ -202,6 +236,10 @@ properties:
         type: string
       source_text:
         type: string
+      sitelink_count:
+        type: integer
+      statement_count:
+        type: integer
       statement_keywords:
         type: array
         items:

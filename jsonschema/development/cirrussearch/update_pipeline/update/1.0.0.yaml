@@ -209,13 +209,49 @@ properties:
         type: integer
         maximum: 9007199254740991
         minimum: 0
+      label_count:
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       labels:
         type: object
         additionalProperties:
           type: array
           items:
             type: string
+      labels_all:
+        type: array
+        items:
+          type: string
       language:
+        type: string
+      lemma:
+        type: array
+        items:
+          type: string
+      lexeme_forms:
+        type: array
+        items:
+          type: object
+          properties:
+            features:
+              type: array
+              items:
+                type: string
+            id:
+              type: string
+            representation:
+              type: array
+              items:
+                type: string
+      lexeme_language:
+        type: object
+        properties:
+          code:
+            type: string
+          entity:
+            type: string
+      lexical_category:
         type: string
       local_sites_with_dupe:
         type: array
@@ -260,10 +296,18 @@ properties:
               type: integer
               maximum: 9007199254740991
               minimum: 0
+      sitelink_count:
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       snapshot:
         type: string
       source_text:
         type: string
+      statement_count:
+        type: integer
+        maximum: 9007199254740991
+        minimum: -9007199254740991
       statement_keywords:
         type: array
         items:
@@ -406,10 +450,25 @@ examples:
       heading:
         - dolor
       incoming_links: 1351079888211148
+      label_count: -6305039478318694
       labels:
         dolorb:
           - dolor
+      labels_all:
+        - dolor
       language: dolor
+      lemma:
+        - dolor
+      lexeme_forms:
+        - features:
+            - dolor
+          id: dolor
+          representation:
+            - dolor
+      lexeme_language:
+        code: dolor
+        entity: dolor
+      lexical_category: dolor
       local_sites_with_dupe:
         - dolor
       namespace: 1351079888211148
@@ -422,8 +481,10 @@ examples:
       redirect:
         - title: dolor
           namespace: 1351079888211148
+      sitelink_count: -6305039478318694
       snapshot: dolor
       source_text: dolor
+      statement_count: -6305039478318694
       statement_keywords:
         - dolor
       template:
