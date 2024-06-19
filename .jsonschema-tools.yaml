@@ -30,3 +30,11 @@ skipSchemaTestCases:
   '/webrequest/1.0.0':
     - schema-enforced-numeric-bounds
     - schema-deterministic-types
+  # mediawiki/page/change (and related) version 1.2.0
+  # removes requiredness of the performer field.
+  # Skip backwards the compatibility check.
+  # https://phabricator.wikimedia.org/T367923
+  '/fragment/mediawiki/state/change/page/1.2.0':
+    - schema-version-compatibility
+  '/mediawiki/page/change/1.2.0':
+    - schema-version-compatibility

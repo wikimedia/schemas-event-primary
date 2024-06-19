@@ -5,13 +5,13 @@ description: >
   It supersedes the other page and revision based event models.
   See: https://phabricator.wikimedia.org/T308017
 
-$id: /mediawiki/page/change/1.1.0
+$id: /mediawiki/page/change/1.2.0
 $schema: 'https://json-schema.org/draft-07/schema#'
 type: object
 additionalProperties: false
 allOf:
   - $ref: /fragment/common/2.0.0#
-  - $ref: /fragment/mediawiki/state/change/page/1.1.0
+  - $ref: /fragment/mediawiki/state/change/page/1.2.0
 
 properties:
   revision:
