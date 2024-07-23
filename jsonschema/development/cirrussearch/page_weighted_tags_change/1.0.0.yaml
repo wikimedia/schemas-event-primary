@@ -12,6 +12,7 @@ required:
   - meta
   - page
   - weighted_tags
+  - wiki_id
 properties:
   $schema:
     description: >
@@ -129,6 +130,12 @@ properties:
           minLength: 1
         minProperties: 1
     minProperties: 1
+  wiki_id:
+    description: >
+      The wiki ID, which is usually the same as the MediaWiki database name.
+      E.g. enwiki, metawiki, etc.
+    type: string
+    minLength: 1
 examples:
   - $schema: /development/cirrussearch/page_weighted_tags_change/1.0.0
     dt: '2024-07-22T00:00:00.0Z'
@@ -148,6 +155,7 @@ examples:
           - tag: A.2
         tag.group.B:
           - tag: B.1
+    wiki_id: example
   - $schema: /development/cirrussearch/page_weighted_tags_change/1.0.0
     dt: '2024-07-22T00:00:00.0Z'
     meta:
@@ -161,6 +169,7 @@ examples:
     weighted_tags:
       clear:
         - tag.group.B
+    wiki_id: example
   - $schema: /development/cirrussearch/page_weighted_tags_change/1.0.0
     dt: '2024-07-22T00:00:00.0Z'
     meta:
@@ -177,3 +186,4 @@ examples:
       set:
         tag.group.A:
           - tag: A.1
+    wiki_id: example
