@@ -25,6 +25,11 @@ properties:
       E.g. enwiki, metawiki, etc.
     type: string
     minLength: 1
+  rev_based:
+    description: >
+      A hint for an event processor that this event has been triggered by new a revision.
+      Only if set to false, the processor may skip merging it with the original page change (and other related events).
+    type: boolean
   weighted_tags:
     description: Tags to be set for and/or cleared from the specified page
     type: object
